@@ -29,12 +29,10 @@ const AudioFeatureSchema = new mongoose.Schema({
 
 const AudioFeatureCollection = mongoose.model('AudioFeature', AudioFeatureSchema)
 
-
+// gets
 function getAllAudioFeatures() {
   return AudioFeatureCollection.find()
 }
-
-//get tracks by user id
 
 function getAudioFeature(audioFeatureId) {
   return AudioFeatureCollection.findById(audioFeatureId)
@@ -44,15 +42,19 @@ function getAudioFeatureByTrackId(trackId) {
   return AudioFeatureCollection.find({trackId: trackId})
 }
 
+
 function addNewAudioFeature(audioFeatureObject) {
   return AudioFeatureCollection.create(audioFeatureObject)
 }
 
-// function updateTrack(trackId, audioFeatureObject) {
-//   return AudioFeatureCollection.findByIdAndUpdate(trackId, audioFeatureObject, {new: true})
-// }
-function deleteAudioFeature(audioFeatureId)
+function updateAudioFeature(audioFeatureId, updatedAudioFeature) {
+  return AudioFeatureCollection.findByIdAndUpdate(audioFeatureId, updatedAudioFeature, {new: true})
+}
+function deleteAudioFeature(audioFeatureId) {
+  return AudioFeatureCollection.findByIdAndDelete(audioFeatureId)
+}
 
+//test data functions
 function deleteAllAudioFeatures() {
   return AudioFeatureCollection.deleteMany()
 }
@@ -60,16 +62,15 @@ function deleteAllAudioFeatures() {
 function addAudioFeatures(audioFeatures) {
   return AudioFeatureCollection.create(audioFeatures)
 }
-/* Step 5
- *
- * TODO: export all functions from this file by adding their names as keys to this
- * object
- */
+
 module.exports = {
   getAllAudioFeatures,
   getAudioFeature,
+  getAudioFeatureByTrackId,
   addNewAudioFeature,
   deleteAllAudioFeatures,
   addAudioFeatures,
-  getAudioFeatureByTrackId
+  updateAudioFeature,
+  deleteAudioFeature
+
 }
