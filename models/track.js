@@ -181,11 +181,7 @@ function deleteAllTracks() {
 function addTracks(tracks) {
   return TrackCollection.create(tracks)
 }
-/* Step 5
- *
- * TODO: export all functions from this file by adding their names as keys to this
- * object
- */
+
 module.exports = {
   getAllTracks,
   getTrack,

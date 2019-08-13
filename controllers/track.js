@@ -4,11 +4,6 @@ const trackApi = require('../models/track.js')
 
 const trackRouter = express.Router()
 
-/* Step 4
- * 
- * TODO: Put all request handlers here
- */
-
 
 trackRouter.get('/', (req, res) => {
   trackApi.getAllTracks()
