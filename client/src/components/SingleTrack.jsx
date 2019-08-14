@@ -20,6 +20,7 @@ export default class SingleTrack extends Component {
         return (
             <div>
                 <h1>{this.state.track.title}</h1>
+                <p>from single track</p>
             </div>
         )
     }

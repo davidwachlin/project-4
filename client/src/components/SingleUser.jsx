@@ -7,7 +7,10 @@ export default class SingleUser extends Component {
     state = {
         user: {}
     }
-
+    componentDidMount() {
+        this.getUser()
+    }
+    
     getUser = () => {
         axios.get(`api/users/${this.props.match.params.userId}`)
             .then(res => {
@@ -18,6 +21,7 @@ export default class SingleUser extends Component {
         return (
             <div>
                 <h1>{this.state.user.name}</h1>
+                <p>from singleuser</p>
             </div>
         )
     }

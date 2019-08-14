@@ -23,6 +23,7 @@ export default class Tracks extends Component {
 		return (
 			<div>
 				<ul>{tracksList}</ul>
+                <p>from tracks component</p>
 			</div>
 		);
 	}
