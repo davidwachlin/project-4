@@ -1,4 +1,3 @@
-
 const mongoose = require('./connection.js')
 
 
@@ -145,7 +144,8 @@ const TrackSchema = new mongoose.Schema({
     preview_url: String,
     track_number: Number,
     type: String,
-    uri: String
+    uri: String,
+    userId: mongoose.Types.ObjectId
 })
 
 
@@ -156,7 +156,9 @@ function getAllTracks() {
   return TrackCollection.find()
 }
 
-//TODO: get tracks by user id
+function getTracksByUserId(userId) {
+  return TrackCollection.find({userId: userId})
+}
 
 function getTrack(trackId) {
   return TrackCollection.findById(trackId)
@@ -185,9 +187,10 @@ function addTracks(tracks) {
 module.exports = {
   getAllTracks,
   getTrack,
+  getTracksByUserId,
   addNewTrack,
   updateTrack,
+  deleteTrack,
   deleteAllTracks,
-  addTracks,
-  deleteTrack
+  addTracks
 }
