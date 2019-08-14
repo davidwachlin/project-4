@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
-import Users from './components/HelloWorld.js'
+import Users from './components/Users'
 import './App.css';
 
 function App() {
