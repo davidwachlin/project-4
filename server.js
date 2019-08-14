@@ -1,29 +1,19 @@
 const express = require('express')
 const app = express()
 
-
+const { userRouter } = require('./controllers/user.js')
 const { trackRouter } = require('./controllers/track.js')
-const { audioFeatureRouter } = require('./controllers/audiofeature')
-const { userRouter } = require('./controllers/user')
-
-
+const { audioFeatureRouter } = require('./controllers/audiofeature.js')
 
 app.use(express.urlencoded({extended: true}))
 
-
 app.use(express.json())
-
-
 
 app.use(express.static(`${__dirname}/client/build`))
 
-
 app.use('/api/users', userRouter)
-app.use('/api/tracks', trackRouter)
-app.use('/api/audioFeatures', audioFeatureRouter)
-
-
-
+app.use('/api/users/:userId/tracks', trackRouter)
+app.use('/api/users/:userId/tracks/:trackId/audiofeature', audioFeatureRouter)
 
 app.get('/*', (req, res) => {
     res.sendFile(`${__dirname}/client/build/index.html`)

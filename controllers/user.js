@@ -13,6 +13,9 @@ userRouter.get('/', (req, res) => {
     .then((users) => {
       res.json(users)
     })
+    .catch(err => {
+      console.log(err)
+    })
 })
 
 
@@ -21,12 +24,18 @@ userRouter.put('/:userId', (req, res) => {
     .then((updatedUser) => {
       res.json(updatedUser)
     })
+    .catch(err => {
+      console.log(err)
+    })
 })
 
 userRouter.get('/:userId', (req, res) => {
   userApi.getUser(req.params.userId)
     .then((user) => {
       res.json(user)
+    })
+    .catch(err => {
+      console.log(err)
     })
 })
 
@@ -35,12 +44,18 @@ userRouter.post('/', (req, res) => {
     .then((user) => {
       res.json(user)
     })
+    .catch(err => {
+      console.log(err)
+    })
 })
 
 userRouter.delete('/:userId', (req, res) => {
   userApi.deleteUser(req.params.userId)
     .then((user) => {
       res.json(user)
+    })
+    .catch(err => {
+      console.log(err)
     })
 })
 

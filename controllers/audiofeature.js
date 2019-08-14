@@ -12,12 +12,18 @@ audioFeatureRouter.get('/', (req, res) => {
     .then((audioFeature) => {
       res.json(audioFeature)
     })
+    .catch(err => {
+      console.log(err)
+    })
 })
 
 audioFeatureRouter.put('/:audioFeatureId', (req, res) => {
   audioFeatureApi.updateAudioFeature(req.params.audioFeatureId, req.body)
     .then((updatedAudioFeature) => {
       res.json(updatedAudioFeature)
+    })
+    .catch(err => {
+      console.log(err)
     })
 })
 
@@ -26,6 +32,9 @@ audioFeatureRouter.get('/:audioFeatureId', (req, res) => {
     .then((audioFeature) => {
       res.json(audioFeature)
     })
+    .catch(err => {
+      console.log(err)
+    })
 })
 
 audioFeatureRouter.post('/', (req, res) => {
@@ -33,12 +42,18 @@ audioFeatureRouter.post('/', (req, res) => {
     .then((audioFeature) => {
       res.json(audioFeature)
     })
+    .catch(err => {
+      console.log(err)
+    })
 })
 
 audioFeatureRouter.delete(':/audioFeatureId', (req, res) => {
   audioFeatureApi.deleteAudioFeature(req.params.audioFeatureId)
     .then((audioFeature) => {
       res.json(audioFeature)
+    })
+    .catch(err => {
+      console.log(err)
     })
 })
 

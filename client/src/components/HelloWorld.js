@@ -8,16 +8,15 @@ import axios from 'axios'
  * Rename this class to reflect the component being created
  *
  */
-export default class HelloWorld extends Component {
+export default class Users extends Component {
 
     /* Step 3
     * Create a state for the component to store view data
     *
     */
     state = {
-        message: ''
+        users: []
     }
-
     /* Step 4
     * Use componentDidMount to retrieve any data to display
     *   Here you can make calls to your local express server
@@ -26,9 +25,9 @@ export default class HelloWorld extends Component {
     *   -REMINDER remember `setState` it is an async function
     */
     componentDidMount() {
-        axios.get('/api/helloworld')
+        axios.get('/api/users')
             .then((res) => {
-                this.setState({message: res.data})
+                this.setState({ users: res.data })
             })
     }
 
@@ -42,7 +41,7 @@ export default class HelloWorld extends Component {
         return (
             <div>
                 {/* Accessing the value of message from the state object */}
-                <h1>{this.state.message}</h1>
+                <h1>{this.state.users.length}</h1>
             </div>
         )
     }
