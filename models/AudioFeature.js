@@ -5,7 +5,7 @@ const mongoose = require('./connection.js')
 const AudioFeatureSchema = new mongoose.Schema({
   
     duration_ms: Number,
-    key: 5,
+    key: Number,
     mode: Number,
     time_signature: Number,
     acousticness: Number,
