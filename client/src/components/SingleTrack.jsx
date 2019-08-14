@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import axios from 'axios'
+import AudioFeature from './AudioFeature'
 
 export default class SingleTrack extends Component {
     state = {
@@ -16,11 +17,18 @@ export default class SingleTrack extends Component {
             this.setState({ track: res.data })
         })
     }
+
+    getAudioFeature = () => {
+        
+    }
+
+
     render() {
         return (
             <div>
                 <h1>{this.state.track.name}</h1>
-                <p>from single track</p>
+                <p>{this.state.track.popularity}</p>
+                <AudioFeature userId={this.props.match.params.userId} trackId={this.props.match.params.trackId} />
             </div>
         )
     }
