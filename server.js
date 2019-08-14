@@ -4,6 +4,7 @@ const app = express()
 
 const { trackRouter } = require('./controllers/track.js')
 const { audioFeatureRouter } = require('./controllers/audiofeature')
+const { userRouter } = require('./controllers/user')
 
 
 
@@ -17,8 +18,11 @@ app.use(express.json())
 app.use(express.static(`${__dirname}/client/build`))
 
 
-
+app.use('/api/users', userRouter)
 app.use('/api/tracks', trackRouter)
+app.use('/api/audioFeatures', audioFeatureRouter)
+
+
 
 
 app.get('/*', (req, res) => {
