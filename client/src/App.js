@@ -11,10 +11,11 @@ function App() {
     <div className="App">
       <Router>
         <Switch>
+        <Route path='/:userId/tracks/:trackId' component={SingleTrack} />
           <Route exact path="/" component={Users}/>
-          <Route path='/:userId/tracks' component={Tracks} />
           <Route path='/:userId' component={SingleUser} />
-          <Route path='/:userId/tracks/:trackId' component={SingleTrack} />
+          {/* <Route path='/:userId/tracks' component={Tracks} /> */}
+
         </Switch>
       </Router>
     </div>

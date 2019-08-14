@@ -19,7 +19,7 @@ export default class SingleTrack extends Component {
     render() {
         return (
             <div>
-                <h1>{this.state.track.title}</h1>
+                <h1>{this.state.track.name}</h1>
                 <p>from single track</p>
             </div>
         )
