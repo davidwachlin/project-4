@@ -11,14 +11,15 @@ export default class Tracks extends Component {
 	}
 
 	getUserTracks = () => {
-		axios.get('/api/users/:userId/tracks').then(res => {
-			this.setState({ users: res.data });
+        axios.get(`/api/users/${this.props.userId}/tracks`)
+            .then(res => {
+			    this.setState({ tracks: res.data });
 		});
 	};
 
 	render() {
-		let tracksList = this.state.users.map(track => {
-			return <li key={track._id}>{track.title}</li>;
+		let tracksList = this.state.tracks.map(track => {
+			return <li key={track._id}>{track.name}</li>;
 		});
 		return (
 			<div>

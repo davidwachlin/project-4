@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import axios from 'axios'
+import Tracks from './Tracks'
 
 
 export default class SingleUser extends Component {
@@ -10,7 +11,7 @@ export default class SingleUser extends Component {
     componentDidMount() {
         this.getUser()
     }
-    
+
     getUser = () => {
         axios.get(`api/users/${this.props.match.params.userId}`)
             .then(res => {
@@ -22,6 +23,7 @@ export default class SingleUser extends Component {
             <div>
                 <h1>{this.state.user.name}</h1>
                 <p>from singleuser</p>
+                <Tracks userId={this.props.match.params.userId} />
             </div>
         )
     }
