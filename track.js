@@ -1,73 +1,233 @@
 {
-    album: {
-      artists: [
-        {
-          external_urls: {
-            spotify: String
-          },
-          href: String,
-          id: String,
-          name: String,
-          type: String,
-          uri: String
-        }
-      ]
-      external_urls: {
-        spotify: String
-      }
-      href: String
-      id: String,
-      images: [
-        {
-          height: Number,
-          url: String,
-          width: Number
-        },
-        {
-          height: Number,
-          url: String,
-          width: Number
-        },
-        {
-          height: Number,
-          url: 'https://i.scdn.co/image/5a73a056d0af707b4119a883d87285feda543fbb',
-          width: Number
-        }
-      ],
-      name: 'Cut To The Feeling',
-      release_date: '2017-05-26',
-      release_date_precision: 'day',
-      type: 'album',
-      uri: 'spotify:album:0tGPJ0bkWOUmH7MEOR77qc'
-    },
+  album: {
+    album_type: 'album',
     artists: [
       {
         external_urls: {
-          spotify: String
+          spotify: 'https://open.spotify.com/artist/0En4EEcDMJ5kaUCf1aZ9js'
         },
-        href: String,
-        id: String,
-        name: String,
-        type: String,
-        uri: String
+        href: 'https://api.spotify.com/v1/artists/0En4EEcDMJ5kaUCf1aZ9js',
+        id: '0En4EEcDMJ5kaUCf1aZ9js',
+        name: 'Lee Dorsey',
+        type: 'artist',
+        uri: 'spotify:artist:0En4EEcDMJ5kaUCf1aZ9js'
       }
     ],
-    disc_number: Number,
-    duration_ms: Number,
-    explicit: Boolean,
-    external_ids: {
-      isrc: String
-    },
+    available_markets: [
+      'AD',
+      'AE',
+      'AR',
+      'AT',
+      'BE',
+      'BG',
+      'BH',
+      'BO',
+      'BR',
+      'CA',
+      'CH',
+      'CL',
+      'CO',
+      'CR',
+      'CY',
+      'CZ',
+      'DE',
+      'DK',
+      'DO',
+      'DZ',
+      'EC',
+      'EE',
+      'EG',
+      'ES',
+      'FI',
+      'FR',
+      'GB',
+      'GR',
+      'GT',
+      'HK',
+      'HN',
+      'HU',
+      'ID',
+      'IE',
+      'IL',
+      'IN',
+      'IS',
+      'IT',
+      'JO',
+      'JP',
+      'KW',
+      'LB',
+      'LI',
+      'LT',
+      'LU',
+      'LV',
+      'MA',
+      'MC',
+      'MT',
+      'MX',
+      'MY',
+      'NI',
+      'NL',
+      'NO',
+      'OM',
+      'PA',
+      'PE',
+      'PH',
+      'PL',
+      'PS',
+      'PT',
+      'PY',
+      'QA',
+      'RO',
+      'SA',
+      'SE',
+      'SG',
+      'SK',
+      'SV',
+      'TH',
+      'TN',
+      'TR',
+      'TW',
+      'US',
+      'UY',
+      'VN',
+      'ZA'
+    ],
     external_urls: {
-      spotify: String
+      spotify: 'https://open.spotify.com/album/2CQt3vL1SHnqxyZvoPQPUb'
     },
-    href: String,
-    id: String,
-    is_local: Boolean,
-    name: String,
-    popularity: Number,
-    preview_url: String,
-    track_number: Number,
-    type: String,
-    uri: String
-  }
+    href: 'https://api.spotify.com/v1/albums/2CQt3vL1SHnqxyZvoPQPUb',
+    id: '2CQt3vL1SHnqxyZvoPQPUb',
+    images: [
+      {
+        height: 636,
+        url: 'https://i.scdn.co/image/4a530a50bd849b51cad079df9e8d2edbd375dbcf',
+        width: 640
+      },
+      {
+        height: 298,
+        url: 'https://i.scdn.co/image/ff9912385526e95bd6a3a3a02a93c87c0279842a',
+        width: 300
+      },
+      {
+        height: 64,
+        url: 'https://i.scdn.co/image/3e20253509e1c5df3e85577d07344102b4b1b650',
+        width: 64
+      }
+    ],
+    name: 'The New Lee Dorsey',
+    release_date: '2000',
+    release_date_precision: 'year',
+    total_tracks: 24,
+    type: 'album',
+    uri: 'spotify:album:2CQt3vL1SHnqxyZvoPQPUb'
+  },
+  artists: [
+    {
+      external_urls: {
+        spotify: 'https://open.spotify.com/artist/0En4EEcDMJ5kaUCf1aZ9js'
+      },
+      href: 'https://api.spotify.com/v1/artists/0En4EEcDMJ5kaUCf1aZ9js',
+      id: '0En4EEcDMJ5kaUCf1aZ9js',
+      name: 'Lee Dorsey',
+      type: 'artist',
+      uri: 'spotify:artist:0En4EEcDMJ5kaUCf1aZ9js'
+    }
+  ],
+  available_markets: [
+    'AD',
+    'AE',
+    'AR',
+    'AT',
+    'BE',
+    'BG',
+    'BH',
+    'BO',
+    'BR',
+    'CA',
+    'CH',
+    'CL',
+    'CO',
+    'CR',
+    'CY',
+    'CZ',
+    'DE',
+    'DK',
+    'DO',
+    'DZ',
+    'EC',
+    'EE',
+    'EG',
+    'ES',
+    'FI',
+    'FR',
+    'GB',
+    'GR',
+    'GT',
+    'HK',
+    'HN',
+    'HU',
+    'ID',
+    'IE',
+    'IL',
+    'IN',
+    'IS',
+    'IT',
+    'JO',
+    'JP',
+    'KW',
+    'LB',
+    'LI',
+    'LT',
+    'LU',
+    'LV',
+    'MA',
+    'MC',
+    'MT',
+    'MX',
+    'MY',
+    'NI',
+    'NL',
+    'NO',
+    'OM',
+    'PA',
+    'PE',
+    'PH',
+    'PL',
+    'PS',
+    'PT',
+    'PY',
+    'QA',
+    'RO',
+    'SA',
+    'SE',
+    'SG',
+    'SK',
+    'SV',
+    'TH',
+    'TN',
+    'TR',
+    'TW',
+    'US',
+    'UY',
+    'VN',
+    'ZA'
+  ],
+  disc_number: 1,
+  duration_ms: 146800,
+  explicit: false,
+  external_ids: {
+    isrc: 'USAR10401057'
+  },
+  external_urls: {
+    spotify: 'https://open.spotify.com/track/5neEPhmOnULqKJE9W4mktR'
+  },
+  href: 'https://api.spotify.com/v1/tracks/5neEPhmOnULqKJE9W4mktR',
+  id: '5neEPhmOnULqKJE9W4mktR',
+  is_local: false,
+  name: 'Gotta Find a Job',
+  popularity: 16,
+  preview_url: 'https://p.scdn.co/mp3-preview/f57066917d76716be8f205e83e0d27860afb50e7?cid=774b29d4f13844c495f206cafdad9c86',
+  track_number: 6,
+  type: 'track',
+  uri: 'spotify:track:5neEPhmOnULqKJE9W4mktR'
+}

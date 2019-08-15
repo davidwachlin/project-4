@@ -4,7 +4,7 @@ const express = require('express')
 const audioFeatureApi = require('../models/AudioFeature.js')
 
 
-const audioFeatureRouter = express.Router()
+const audioFeatureRouter = express.Router({ mergeParams: true })
 
 audioFeatureRouter.get('/', (req, res) => {
   const trackId = req.params.trackId
@@ -38,6 +38,7 @@ audioFeatureRouter.get('/:audioFeatureId', (req, res) => {
 })
 
 audioFeatureRouter.post('/', (req, res) => {
+  req.body.trackId = req.params.trackId
   audioFeatureApi.addNewAudioFeature(req.body)
     .then((audioFeature) => {
       res.json(audioFeature)

@@ -2,11 +2,12 @@ const express = require('express')
 
 const trackApi = require('../models/track.js')
 
-const trackRouter = express.Router()
+const trackRouter = express.Router({ mergeParams: true })
 
 
 trackRouter.get('/', (req, res) => {
-  trackApi.getAllTracks()
+  const userId = req.params.userId
+  trackApi.getTracksByUserId(userId)
     .then((tracks) => {
       res.json(tracks)
     })
