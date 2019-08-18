@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import axios from 'axios'
 import Tracks from './Tracks'
+import { Track } from 'react-spotify-api'
 
 
 export default class SingleUser extends Component {
@@ -22,8 +23,10 @@ export default class SingleUser extends Component {
         return (
             <div>
                 <h1>{this.state.user.name}</h1>
-                <p>from singleuser</p>
+                <p>{this.state.user.email}</p>
+
                 <Tracks userId={this.props.match.params.userId} />
+                <Track />
             </div>
         )
     }

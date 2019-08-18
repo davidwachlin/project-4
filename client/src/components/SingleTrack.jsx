@@ -18,6 +18,8 @@ export default class SingleTrack extends Component {
         })
     }
 
+
+
     getAudioFeature = () => {
         
     }
@@ -28,7 +30,8 @@ export default class SingleTrack extends Component {
             <div>
                 <h1>{this.state.track.name}</h1>
                 <p>{this.state.track.popularity}</p>
-                <AudioFeature userId={this.props.match.params.userId} trackId={this.props.match.params.trackId} />
+                <p>{this.state.track.id}</p>
+                <AudioFeature userId={this.props.match.params.userId} trackId={this.props.match.params.trackId} id={this.state.track.id}/>
             </div>
         )
     }

@@ -3,10 +3,12 @@ const mongoose = require('./connection.js')
 
 
 const UserSchema = new mongoose.Schema({
-  name: String,
+  displayName: String,
   email: String,
-  photoUrl: String,
-  emailVerified: Boolean
+  externalUrls: String,
+  country: String,
+  id: String,
+  type: String
 })
 
 

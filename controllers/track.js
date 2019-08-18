@@ -2,6 +2,7 @@ const express = require('express')
 
 const trackApi = require('../models/track.js')
 
+
 const trackRouter = express.Router({ mergeParams: true })
 
 
@@ -42,6 +43,7 @@ trackRouter.post('/', (req, res) => {
   trackApi.addNewTrack(req.body)
     .then((track) => {
       res.json(track)
+
     })
     .catch(err => {
       console.log(err)

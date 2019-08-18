@@ -4,8 +4,12 @@ import { Link } from 'react-router-dom'
 
 export default class Tracks extends Component {
 	state = {
-		tracks: []
+		tracks: [],
+		isNewFormDisplayed: false,
+		newTrack: {},
+		searchField: ''
 	};
+	
 
 	componentDidMount() {
 		this.getUserTracks();
@@ -17,6 +21,12 @@ export default class Tracks extends Component {
 			    this.setState({ tracks: res.data });
 		});
 	};
+
+	handleChange = (e) => {
+		e.preventDefault()
+		this.e.target.name = this.e.target.value
+		this.setState({})
+	}
 
 	render() {
 		let tracksList = this.state.tracks.map(track => {

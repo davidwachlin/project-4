@@ -5,7 +5,6 @@ import Tracks from './components/Tracks'
 import SingleUser from './components/SingleUser'
 import SingleTrack from './components/SingleTrack'
 import Home from './components/Home'
-import Login from './components/Login'
 import './App.css';
 
 function App() {
@@ -13,10 +12,11 @@ function App() {
     <div className="App">
       <Router>
         <Switch>
-          <Route path='/Home' component={Home} />
         <Route path='/:userId/tracks/:trackId' component={SingleTrack} />
           <Route exact path="/" component={Login}/>
           <Route path='/:userId' component={SingleUser} />
+          <Route path='/home' component={Home} />
+          <Route path='/users' component={Users} />
           {/* <Route path='/:userId/tracks' component={Tracks} /> */}
 
         </Switch>
