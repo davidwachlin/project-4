@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import SpotifyWebApi from 'spotify-web-api-js';
 import axios from 'axios';
 import Trackcard from './Trackcard'
+import BarChart from './BarChart'
 import './Home.css'
 
 
@@ -25,7 +26,8 @@ export default class Home extends Component {
 				id: '',
 				type: ''
 			},
-			topTracks: []
+			topTracks: [],
+			topTrackAudioFeatures:[]
 		};
 	}
 	componentDidMount() {
@@ -38,6 +40,9 @@ export default class Home extends Component {
 		if (prevState.currentUser !== this.state.currentUser) {
 			this.getTopTracks();
 			this.getNowPlaying();
+		}
+		if (prevState.topTracks !== this.state.topTracks) {
+			this.getTopTrackAudioFeatures()
 		}
 	}
 
@@ -62,12 +67,20 @@ export default class Home extends Component {
 		});
 	}
 	
+
 	getTopTracks() {
 		spotifyApi.getMyTopTracks().then((data) => {
 			this.setState({ topTracks: data.items })
 		})
 	}
 	
+	getTopTrackAudioFeatures() {
+		let trackIds = this.state.topTracks.map(track => track.id)
+		spotifyApi.getAudioFeaturesForTracks(trackIds).then(response => {
+			console.log(response)
+			this.setState({ topTrackAudioFeatures: response})
+		})
+	}
 	getNowPlaying() {
 		spotifyApi.getMyCurrentPlaybackState().then(response => {
 			console.log(response)
@@ -86,7 +99,13 @@ export default class Home extends Component {
 			return (
 				<Trackcard track={track} />
 			)
+
+		
 		})
+
+		
+
+		
 		return (
 			<div className='Home'>
 				<h1>Home</h1>
@@ -97,6 +116,8 @@ export default class Home extends Component {
 
 				{tracksList}
 				</div>
+
+				<BarChart audioFeatures={this.state.topTrackAudioFeatures}/>
 			</div>
 		);
 	}
