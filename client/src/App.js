@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
-import Users from './components/Users'
-import Tracks from './components/Tracks'
+// import Users from './components/Users'
+// import Tracks from './components/Tracks'
 import SingleUser from './components/SingleUser'
 import SingleTrack from './components/SingleTrack'
 import Home from './components/Home'

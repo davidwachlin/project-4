@@ -9,7 +9,19 @@ export const authEndpoint = 'https://accounts.spotify.com/authorize';
 // Replace with your app's client ID, redirect URI and desired scopes
 const clientId = 'baf17787c2f143b594964abf61d5ae74';
 const redirectUri = 'http://localhost:3000';
-const scopes = ['user-read-currently-playing', 'user-read-playback-state'];
+const scopes = [
+	'user-read-private', 
+	'user-read-email', 
+	'user-read-recently-played', 
+	'user-top-read', 
+	'user-library-read', 
+	'playlist-read-collaborative',
+	'playlist-read-private',
+	'user-library-read',
+	'user-read-playback-state',
+	'user-read-currently-playing'
+
+];
 
 class Login extends Component {
 	constructor() {
