@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
 import SpotifyWebApi from 'spotify-web-api-js';
 import axios from 'axios';
+import Trackcard from './Trackcard'
+import './Home.css'
+
+
 const spotifyApi = new SpotifyWebApi();
 
 export default class Home extends Component {
@@ -26,12 +30,14 @@ export default class Home extends Component {
 	}
 	componentDidMount() {
 		this.getCurrentUser();
-		this.getNowPlaying();
+
+
 	}
 
 	componentDidUpdate(prevProps, prevState) {
 		if (prevState.currentUser !== this.state.currentUser) {
 			this.getTopTracks();
+			this.getNowPlaying();
 		}
 	}
 
@@ -64,20 +70,22 @@ export default class Home extends Component {
 	
 	getNowPlaying() {
 		spotifyApi.getMyCurrentPlaybackState().then(response => {
-			console.log(response);
-			this.setState({
-				nowPlaying: {
-					name: response.item.name,
-					albumArt: response.item.album.images[0].url
-				}
-			});
-		});
+			console.log(response)
+			// this.setState({
+			// 	nowPlaying: {
+			// 		name: response.item.name,
+			// 		albumArt: response.item.album.images[0].url
+			// 	}5
+			// })
+		})
 	}
 	render() {
 		const { topTracks } = this.state;
 		const tracksList = !topTracks.length ? null 
 		: topTracks.map(track => {
-			return <li>{track.name}</li>
+			return (
+				<Trackcard track={track} />
+			)
 		})
 		return (
 			<div className='Home'>
@@ -85,7 +93,10 @@ export default class Home extends Component {
 				<div>Now Playing: {this.state.nowPlaying.name}</div>
 				<div>{this.state.currentUser.email}</div>
 				<div>{this.state.currentUser.id}</div>
-				<ul>{tracksList}</ul>
+				<div className="track-list">
+
+				{tracksList}
+				</div>
 			</div>
 		);
 	}

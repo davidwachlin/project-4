@@ -6,6 +6,8 @@ import { Link, Redirect } from 'react-router-dom'
 // import "./Login.css";
 
 export const authEndpoint = 'https://accounts.spotify.com/authorize';
+
+
 // Replace with your app's client ID, redirect URI and desired scopes
 const clientId = 'baf17787c2f143b594964abf61d5ae74';
 const redirectUri = 'http://localhost:3000';
