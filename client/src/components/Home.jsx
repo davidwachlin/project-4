@@ -42,7 +42,7 @@ export default class Home extends Component {
 	componentDidUpdate(prevProps, prevState) {
 		if (prevState.currentUser !== this.state.currentUser) {
 			this.getTopTracks();
-			this.getNowPlaying();
+			// this.getNowPlaying();
 		}
 		if (prevState.topTracks !== this.state.topTracks) {
 			this.getTopTrackAudioFeatures()
@@ -128,6 +128,7 @@ export default class Home extends Component {
 		return (
 			<div className='Home'>
 				<Link to='/barcharts/new'>New BarChart</Link>
+				<Link to='/barcharts/'>All BarCharts</Link>
 				<div>Now Playing: {this.state.nowPlaying.name}</div>
 				<div>{this.state.currentUser.email}</div>
 				<div>{this.state.currentUser.id}</div>

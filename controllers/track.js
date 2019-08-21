@@ -50,7 +50,7 @@ trackRouter.post('/', (req, res) => {
     })
 })
 
-trackRouter.delete(':/trackId', (req, res) => {
+trackRouter.delete('/:trackId', (req, res) => {
   trackApi.deleteTrack(req.params.trackId)
     .then((track) => {
       res.json(track)
