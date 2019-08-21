@@ -5,7 +5,7 @@ export default class Comments extends Component {
         
         return (
             <div>
-                {}
+                
                 
             </div>
         )

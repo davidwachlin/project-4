@@ -4,6 +4,8 @@ import BarChart from './BarChart';
 import SpotifyWebApi from 'spotify-web-api-js';
 import TrackSearch from './TrackSearch/TrackSearch';
 import { Link } from 'react-router-dom'
+import Trackcard from './Trackcard'
+import './Home.css'
 
 const spotifyApi = new SpotifyWebApi();
 
@@ -49,7 +51,7 @@ export default class SingleBarChart extends Component {
 				this.setState({ barChart: res.data });
 			});
 	};
-	getTracks() {
+	getTracks = () => {
 		console.log(this.props.match.params.barChartId);
 		axios
 			.get(`/api/barCharts/${this.props.match.params.barChartId}/tracks`)
@@ -61,7 +63,7 @@ export default class SingleBarChart extends Component {
     
 
 
-	getCommments() {
+	getCommments = () => {
 		axios
 			.get(`/api/barCharts/${this.props.match.params.barChartId}/comments`)
 			.then(res => {
@@ -69,7 +71,7 @@ export default class SingleBarChart extends Component {
 			});
 	}
 
-	getTrackAudioFeatures() {
+	getTrackAudioFeatures = () => {
 		let trackIds = this.state.tracks.map(track => track.id);
 		spotifyApi.getAudioFeaturesForTracks(trackIds).then(response => {
 			console.log(response);
@@ -101,7 +103,11 @@ export default class SingleBarChart extends Component {
 	};
 
 	render() {
-		let commentList = this.state.comments.map(comment => (
+        let trackList = this.state.tracks.map(track => {
+            return <Trackcard track={track} barChartId={this.props.match.params.barChartId} />
+        })
+
+        let commentList = this.state.comments.map(comment => (
 			<div key={comment._id}>
 				<p>{comment.comment}</p>
 				<p>By: {comment.author}</p>
@@ -114,6 +120,7 @@ export default class SingleBarChart extends Component {
 
 				{this.state.showSearchBar ? (
 					<div>
+                        <button onClick={this.handleShowSearchBar}>Done</button>
 						<TrackSearch barChartId={this.props.match.params.barChartId} />
 					</div>
 				) : (
@@ -121,6 +128,12 @@ export default class SingleBarChart extends Component {
 						<button onClick={this.handleShowSearchBar}>Add Tracks</button>
 
 						<BarChart data={this.state.tracksWithFeatures} graphFeature={this.state.graphFeature} />
+
+                        <div className='track-list'>
+                            {trackList}
+                        </div>
+
+                        
 
 						{this.state.showComments ? (
 							<div>
