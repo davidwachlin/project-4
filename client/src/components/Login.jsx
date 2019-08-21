@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import getHashAndRedirect from '../helpers';
 import logo from '../Spotify_logo_without_text.svg';
-import { Link, Redirect } from 'react-router-dom'
+import { Redirect } from 'react-router-dom'
 
 // import "./Login.css";
 
@@ -47,7 +47,7 @@ class Login extends Component {
 		return (
 			<div className='Login'>
 				<header className='Login-header'>
-					<img src={logo} className='Login-logo' alt='logo' />
+					<div><img src={logo} className='Login-logo' alt='logo' /></div>
 					{!this.state.token && (
 						<a
 							className='btn btn--login Login-link'

@@ -3,8 +3,9 @@ import SpotifyWebApi from 'spotify-web-api-js';
 import axios from 'axios';
 import Trackcard from './Trackcard'
 import BarChart from './BarChart'
+import { Link } from 'react-router-dom'
 import './Home.css'
-
+import TrackSearch from './TrackSearch/TrackSearch'
 
 const spotifyApi = new SpotifyWebApi();
 
@@ -27,7 +28,9 @@ export default class Home extends Component {
 				type: ''
 			},
 			topTracks: [],
-			topTrackAudioFeatures:[]
+			topTrackAudioFeatures:[],
+			tracksWithFeatures:[]
+
 		};
 	}
 	componentDidMount() {
@@ -44,8 +47,23 @@ export default class Home extends Component {
 		if (prevState.topTracks !== this.state.topTracks) {
 			this.getTopTrackAudioFeatures()
 		}
+		if (prevState.topTrackAudioFeatures !== this.state.topTrackAudioFeatures) {
+			this.attachTrackAudioFeatures()
+		}
 	}
 
+
+	attachTrackAudioFeatures() {
+		const { topTracks, topTrackAudioFeatures} = this.state;
+		let tracksWithFeatures = [];
+		topTracks.forEach((track, i) => {
+			  tracksWithFeatures.push(Object.assign({}, track, topTrackAudioFeatures[i]));
+			  
+		});
+		this.setState({ tracksWithFeatures: tracksWithFeatures })
+		console.log(`tracksWithFeatures:`)
+		console.log(tracksWithFeatures)
+	}
 	getCurrentUser() {
 		spotifyApi.getMe().then(res => {
 			console.log(res);
@@ -60,16 +78,17 @@ export default class Home extends Component {
 			// axios.get('/api/users/checkUser', newUser).then((res) => {
 			// 	console.log(res)
 			// })
-			axios.post('/api/users', newUser).then(() => {});
+			axios.post('/api/users', newUser).then((res) => {});
 			this.setState({
 				currentUser: newUser
+
 			});
 		});
 	}
 	
 
 	getTopTracks() {
-		spotifyApi.getMyTopTracks().then((data) => {
+		spotifyApi.getMyTopTracks({limit: 10}).then((data) => {
 			this.setState({ topTracks: data.items })
 		})
 	}
@@ -78,18 +97,18 @@ export default class Home extends Component {
 		let trackIds = this.state.topTracks.map(track => track.id)
 		spotifyApi.getAudioFeaturesForTracks(trackIds).then(response => {
 			console.log(response)
-			this.setState({ topTrackAudioFeatures: response})
+			this.setState({ topTrackAudioFeatures: response.audio_features })
 		})
 	}
 	getNowPlaying() {
 		spotifyApi.getMyCurrentPlaybackState().then(response => {
 			console.log(response)
-			// this.setState({
-			// 	nowPlaying: {
-			// 		name: response.item.name,
-			// 		albumArt: response.item.album.images[0].url
-			// 	}5
-			// })
+			this.setState({
+				nowPlaying: {
+					name: response.item.name,
+					albumArt: response.item.album.images[0].url
+				}
+			})
 		})
 	}
 	render() {
@@ -97,7 +116,7 @@ export default class Home extends Component {
 		const tracksList = !topTracks.length ? null 
 		: topTracks.map(track => {
 			return (
-				<Trackcard track={track} />
+				<Trackcard key={track.id} track={track} />
 			)
 
 		
@@ -108,16 +127,17 @@ export default class Home extends Component {
 		
 		return (
 			<div className='Home'>
-				<h1>Home</h1>
+				<Link to='/barcharts/new'>New BarChart</Link>
 				<div>Now Playing: {this.state.nowPlaying.name}</div>
 				<div>{this.state.currentUser.email}</div>
 				<div>{this.state.currentUser.id}</div>
 				<div className="track-list">
 
 				{tracksList}
-				</div>
 
-				<BarChart audioFeatures={this.state.topTrackAudioFeatures}/>
+				</div>
+				<BarChart data={this.state.tracksWithFeatures} />
+
 			</div>
 		);
 	}

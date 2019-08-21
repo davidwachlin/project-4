@@ -25,8 +25,6 @@ export default class SingleUser extends Component {
                 <h1>{this.state.user.name}</h1>
                 <p>{this.state.user.email}</p>
 
-                <Tracks userId={this.props.match.params.userId} />
-                <Track />
             </div>
         )
     }

@@ -3,12 +3,12 @@ const express = require('express')
 const barChartApi = require('../models/barChart.js')
 
 
-const barChartRouter = express.Router({ mergeParams: true })
+const barChartRouter = express.Router()
 
 
 barChartRouter.get('/', (req, res) => {
-  const userId = req.params.userId
-  barChartApi.getTracksByUserId(userId)
+  const barChartId = req.params.barChartId
+  barChartApi.getTracksByBarChartId(barChartId)
     .then((barCharts) => {
       res.json(barCharts)
     })
@@ -39,7 +39,7 @@ barChartRouter.get('/:barChartId', (req, res) => {
 })
 
 barChartRouter.post('/', (req, res) => {
-  req.body.userId = req.params.userId
+  req.body.barChartId = req.params.barChartId
   barChartApi.addNewTrack(req.body)
     .then((barChart) => {
       res.json(barChart)

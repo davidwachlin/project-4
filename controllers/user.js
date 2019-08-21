@@ -58,16 +58,16 @@ userRouter.delete('/:userId', (req, res) => {
 		});
 });
 
-// userRouter.get('/checkUser', (req, res) => {
-//   console.log(`check user - ${req.body.email} ========================================`)
-//   userApi.checkUser(req.body.email)
-//   .then(response => {
-//     res.json(response)
-//   })
-//   .catch(err => {
-//     console.log(err);
-//   });
-// })
+userRouter.get('/checkUser', (req, res) => {
+  console.log(`check user route - ${req.body.id} ========================================`)
+  userApi.checkUser(req.body.id)
+  .then(response => {
+    res.json(response)
+  })
+  .catch(err => {
+    console.log(err);
+  });
+})
 
 module.exports = {
 	userRouter

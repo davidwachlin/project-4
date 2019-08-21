@@ -20,8 +20,8 @@ UserSchema.plugin(uniqueValidator);
 
 const UserCollection = mongoose.model('User', UserSchema)
 
-function checkUser(userEmail) {
-  return UserCollection.findOne({ email: userEmail})
+function checkUser(userId) {
+  return UserCollection.findOne({ id: userId})
 }
 
 function getAllUsers() {

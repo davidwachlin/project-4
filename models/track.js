@@ -19,7 +19,7 @@ const TrackSchema = new mongoose.Schema({
   track_number: Number,
   type: String,
   url: String,
-  userId: mongoose.Types.ObjectId
+  barChartId: mongoose.Types.ObjectId
 })
 
 

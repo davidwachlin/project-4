@@ -4,12 +4,9 @@ var Types = require('mongoose-easy-types').Types;
 
 
 const BarChartSchema = new mongoose.Schema({
-  tracks: Array,
-  graphFeature: {
-    type: String,
-    default: 'energy'
-  },
-  userId: mongoose.Types.ObjectId
+  name: String,
+  graphFeature: String,
+
 })
 
 
@@ -49,7 +46,6 @@ function addBarCharts(barCharts) {
 
 module.exports = {
   getAllBarCharts,
-  checkBarChart,
   getBarChart,
   addNewBarChart,
   updateBarChart,
