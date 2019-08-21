@@ -2,12 +2,15 @@ import React, { Component } from 'react';
 import { VictoryBar, VictoryChart, VictoryAxis, VictoryTheme } from 'victory';
 
 export default class BarChart extends Component {
-	constructor(props) {
-		super(props);
-	}
+
+		static defaultProps = {
+			graphFeature: 'energy'
+		}
+	
 
 	render() {
 		const { data } = this.props;
+		const { graphFeature } = this.props;
 
 		console.log('from barchart', data);
 
@@ -29,7 +32,7 @@ export default class BarChart extends Component {
 
 				/>
 
-				<VictoryBar style={{ data: { fill: "#56FA71" } }} data={data} x='name' y='energy' />
+				<VictoryBar style={{ data: { fill: "#56FA71" } }} data={data} x='name' y={graphFeature}  />
 			</VictoryChart>
 		);
 	}

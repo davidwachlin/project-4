@@ -127,13 +127,13 @@ export default class Home extends Component {
 		
 		return (
 			<div className='Home'>
-				<Link to='/barcharts/new'>New BarChart</Link>
-				<Link to='/barcharts/'>All BarCharts</Link>
-				<div>Now Playing: {this.state.nowPlaying.name}</div>
-				<div>{this.state.currentUser.email}</div>
-				<div>{this.state.currentUser.id}</div>
-				<div className="track-list">
 
+				<h2>Welcome {this.state.currentUser.id}</h2>
+				<Link to='/barcharts/'>All BarCharts</Link>
+
+				<div>{this.state.currentUser.email}</div>
+				<h3>Your Top Tracks</h3>
+				<div className="track-list">
 				{tracksList}
 
 				</div>

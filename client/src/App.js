@@ -9,6 +9,7 @@ import Login from './components/Login';
 import NewBarChart from './components/NewBarChart';
 import BarCharts from './components/BarCharts';
 import SingleBarChart from './components/SingleBarChart';
+import Comment from './components/Comment'
 import './App.css';
 
 function App() {
@@ -18,7 +19,7 @@ function App() {
 				<Switch>
 					<Route path='/barcharts/new' component={NewBarChart} />
 					<Route path='/barcharts/:barChartId' component={SingleBarChart} />
-
+          <Route path='/barcharts/:barChartId/comments/:commentId' component={Comment} />
 					<Route path='/barcharts' component={BarCharts} />
 					<Route path='/home' component={Home} />
 					<Route exact path='/' component={Login} />

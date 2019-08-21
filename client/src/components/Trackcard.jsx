@@ -9,6 +9,8 @@ export default class Trackcard extends Component {
                 <img src={imgUrl} alt='cover' />
                 <p>{this.props.track.name}</p>
                 <p>{this.props.track.artists[0].name}</p>
+                <button onClick={this.props.addTrackToBarChart}>Add</button>
+            
                 
 
                 

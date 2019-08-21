@@ -5,18 +5,17 @@ import { Link } from 'react-router-dom'
 export default class Tracks extends Component {
 	state = {
 		tracks: [],
-		isNewFormDisplayed: false,
+		isTrackSearchDisplayed: false,
 		newTrack: {},
-		searchField: ''
 	};
 	
 
 	componentDidMount() {
-		this.getUserTracks();
+		this.getTracks();
 	}
 
-	getUserTracks = () => {
-        axios.get(`/api/users/${this.props.userId}/tracks`)
+	geTracks = () => {
+        axios.get(`/api/barCharts/${this.props.barChartId}/tracks`)
             .then(res => {
 			    this.setState({ tracks: res.data });
 		});
