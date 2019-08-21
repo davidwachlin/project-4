@@ -7,8 +7,7 @@ const barChartRouter = express.Router()
 
 
 barChartRouter.get('/', (req, res) => {
-  const barChartId = req.params.barChartId
-  barChartApi.getTracksByBarChartId(barChartId)
+  barChartApi.getAllBarCharts()
     .then((barCharts) => {
       res.json(barCharts)
     })
@@ -19,9 +18,9 @@ barChartRouter.get('/', (req, res) => {
 
 
 barChartRouter.put('/:barChartId', (req, res) => {
-  barChartApi.updateTrack(req.params.barChartId, req.body)
-    .then((updatedTrack) => {
-      res.json(updatedTrack)
+  barChartApi.updateBarChart(req.params.barChartId, req.body)
+    .then((updatedBarChart) => {
+      res.json(updatedBarChart)
     })
     .catch(err => {
       console.log(err)
@@ -29,7 +28,7 @@ barChartRouter.put('/:barChartId', (req, res) => {
 })
 
 barChartRouter.get('/:barChartId', (req, res) => {
-  barChartApi.getTrack(req.params.barChartId)
+  barChartApi.getBarChart(req.params.barChartId)
     .then((barChart) => {
       res.json(barChart)
     })
@@ -40,7 +39,7 @@ barChartRouter.get('/:barChartId', (req, res) => {
 
 barChartRouter.post('/', (req, res) => {
   req.body.barChartId = req.params.barChartId
-  barChartApi.addNewTrack(req.body)
+  barChartApi.addNewBarChart(req.body)
     .then((barChart) => {
       res.json(barChart)
 
@@ -50,8 +49,8 @@ barChartRouter.post('/', (req, res) => {
     })
 })
 
-barChartRouter.delete(':/barChartId', (req, res) => {
-  barChartApi.deleteTrack(req.params.barChartId)
+barChartRouter.delete('/:barChartId', (req, res) => {
+  barChartApi.deleteBarChart(req.params.barChartId)
     .then((barChart) => {
       res.json(barChart)
     })
