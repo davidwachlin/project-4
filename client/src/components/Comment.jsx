@@ -44,7 +44,7 @@ export default class Comment extends Component {
 			.then(res => {
 				this.setState({
 					comment: res.data,
-					isEditFormDisplayed: false
+					redirectToBarChart: true
 				});
 			});
 	};

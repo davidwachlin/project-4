@@ -5,12 +5,14 @@ import { Redirect } from 'react-router-dom'
 
 export default class Trackcard extends Component {
 
-    componentDidMount() {
-
+    state = {
+        redirectToBarChart: false
     }
     addTrackToBarChart = () => {
         axios.post(`/api/barCharts/${this.props.barChartId}/tracks`, this.props.track)
-        .then((res) => console.log(res))
+        .then((res) => {
+            this.setState({ redirectToBarChart: true })
+        })
     }
 
     deleteTrack = () => {
@@ -19,8 +21,11 @@ export default class Trackcard extends Component {
     }
 
     render() {
-        console.log(this.props.track.album.images[1])
+        // if (this.state.redirectToBarChart) {
+		// 	return <Redirect to={`/barcharts/${this.props.barChartId}`} />;
+		// }
         const imgUrl = this.props.track.album.images[1].url
+
 
         return (
             <div className='Trackcard'>

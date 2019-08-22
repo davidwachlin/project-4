@@ -26,7 +26,7 @@ export default class Tracks extends Component {
 	render() {
 		let tracksList = this.state.tracks.map(track => {
             return <li key={track._id}>
-            <Link to={`barcharts/${this.props.match.params.barChartId}/tracks/${track._id}`}>
+            <Link to={`/barcharts/${this.props.match.params.barChartId}/tracks/${track._id}`}>
             {track.name}
             </Link>
 			</li>;

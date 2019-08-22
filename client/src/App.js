@@ -18,11 +18,11 @@ function App() {
 		<div className='App'>
 			<Router>
 				<Switch>
+					<Route path='/barcharts/:barChartId/tracks/:trackId' component={SingleTrack}/>
 					<Route
 						path='/barcharts/:barChartId/comments/:commentId'
 						component={Comment}
 					/>
-					<Route path='/barcharts/:barChartId/tracks/:trackId' component={SingleTrack}/>
 					<Route exact path='/barcharts/new' component={NewBarChart} />
 					<Route path='/barcharts/:barChartId/tracks' component={Tracks} />
 					<Route path='/barcharts/:barChartId' component={SingleBarChart} />
