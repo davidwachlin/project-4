@@ -3,9 +3,9 @@ import axios from 'axios';
 import BarChart from './BarChart';
 import SpotifyWebApi from 'spotify-web-api-js';
 import TrackSearch from './TrackSearch/TrackSearch';
-import { Link } from 'react-router-dom'
-import Trackcard from './Trackcard'
-import './Home.css'
+import { Link } from 'react-router-dom';
+import Trackcard from './Trackcard';
+import './Home.css';
 
 const spotifyApi = new SpotifyWebApi();
 
@@ -23,7 +23,12 @@ export default class SingleBarChart extends Component {
 			tracksWithFeatures: [],
 			showSearchBar: false,
 			showComments: false,
-			comments: []
+			comments: [],
+			newComment: {
+				comment: '',
+				author: ''
+			},
+			isNewCommentFormDisplayed: false
 		};
 	}
 	componentDidMount() {
@@ -59,9 +64,7 @@ export default class SingleBarChart extends Component {
 				console.log(res.data);
 				this.setState({ tracks: res.data });
 			});
-    }
-    
-
+	};
 
 	getCommments = () => {
 		axios
@@ -69,7 +72,7 @@ export default class SingleBarChart extends Component {
 			.then(res => {
 				this.setState({ comments: res.data });
 			});
-	}
+	};
 
 	getTrackAudioFeatures = () => {
 		let trackIds = this.state.tracks.map(track => track.id);
@@ -77,7 +80,7 @@ export default class SingleBarChart extends Component {
 			console.log(response);
 			this.setState({ tracksAudioFeatures: response.audio_features });
 		});
-	}
+	};
 
 	attachTrackAudioFeatures() {
 		const { tracks, tracksAudioFeatures } = this.state;
@@ -96,22 +99,48 @@ export default class SingleBarChart extends Component {
 		});
 	};
 
-	handleShowComments = () => {
+	handleToggleNewCommentForm = () => {
 		this.setState(state => {
-			return { showComments: !state.showComments };
+			return { isNewCommentFormDisplayed: !state.isNewCommentFormDisplayed };
 		});
 	};
 
-	render() {
-        let trackList = this.state.tracks.map(track => {
-            return <Trackcard track={track} barChartId={this.props.match.params.barChartId} />
-        })
+	handleInputChange = e => {
+		const newComment = { ...this.state.newComment };
+		newComment[e.target.name] = e.target.value;
+		this.setState({ newComment: newComment });
+	};
 
-        let commentList = this.state.comments.map(comment => (
+	handleCommentSubmit = event => {
+		event.preventDefault();
+		axios
+			.post(
+				`/api/barCharts/${this.props.match.params.barChartId}/comments`,
+				this.state.newComment
+			)
+			.then(() => {
+				this.handleToggleNewCommentForm();
+				this.getCommments()
+			});
+
+	};
+
+	render() {
+		// let trackList = this.state.tracks.map(track => {
+		// 	console.log(track)
+		// 	return <Trackcard track={track} barChartId={this.props.match.params.barChartId} />
+		// })
+
+		let commentList = this.state.comments.map(comment => (
 			<div key={comment._id}>
 				<p>{comment.comment}</p>
 				<p>By: {comment.author}</p>
-                <Link to={`/barcharts/${this.props.match.params.barChartId}/comments/${comment._id}`}>View/Edit</Link>
+				<Link
+					to={`/barcharts/${this.props.match.params.barChartId}/comments/${
+						comment._id
+					}`}>
+					View/Edit
+				</Link>
 			</div>
 		));
 		return (
@@ -120,28 +149,56 @@ export default class SingleBarChart extends Component {
 
 				{this.state.showSearchBar ? (
 					<div>
-                        <button onClick={this.handleShowSearchBar}>Done</button>
+						<button onClick={this.handleShowSearchBar}>Done</button>
 						<TrackSearch barChartId={this.props.match.params.barChartId} />
 					</div>
 				) : (
 					<div>
+						<div>
+							<Link
+								to={`/barcharts/${this.props.match.params.barChartId}/tracks`}>
+								Tracks
+							</Link>
+						</div>
 						<button onClick={this.handleShowSearchBar}>Add Tracks</button>
 
-						<BarChart data={this.state.tracksWithFeatures} graphFeature={this.state.graphFeature} />
+						<BarChart
+							data={this.state.tracksWithFeatures}
+							graphFeature={this.state.graphFeature}
+						/>
 
-                        <div className='track-list'>
-                            {trackList}
-                        </div>
+						<div className='track-list'>{/* {trackList} */}</div>
 
-                        
+						{this.state.isNewCommentFormDisplayed ? (
+							<form onSubmit={this.handleCommentSubmit}>
+								<label htmlFor='comment'>Comment</label>
+								<input
+									onChange={this.handleInputChange}
+									type='text'
+									id='comment'
+									name='comment'
+									value={this.state.newComment.comment}
+								/>
 
-						{this.state.showComments ? (
-							<div>
-								{commentList}
-								<button onClick={this.handleShowComments}>Hide Comments</button>
-							</div>
+								<label htmlFor='author'>Author</label>
+								<input
+									onChange={this.handleInputChange}
+									type='text'
+									id='author'
+									name='author'
+									value={this.state.newComment.author}
+								/>
+								<input type='submit' value='Add' />
+							</form>
 						) : (
-							<button onClick={this.handleShowComments}>Comments</button>
+							<div>
+								<h5>Comments</h5>
+								{commentList}
+
+								<button onClick={this.handleToggleNewCommentForm}>
+									New Comment
+								</button>
+							</div>
 						)}
 					</div>
 				)}

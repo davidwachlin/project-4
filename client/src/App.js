@@ -9,7 +9,8 @@ import Login from './components/Login';
 import NewBarChart from './components/NewBarChart';
 import BarCharts from './components/BarCharts';
 import SingleBarChart from './components/SingleBarChart';
-import Comment from './components/Comment'
+import Comment from './components/Comment';
+import Tracks from './components/Tracks'
 import './App.css';
 
 function App() {
@@ -17,9 +18,14 @@ function App() {
 		<div className='App'>
 			<Router>
 				<Switch>
-					<Route path='/barcharts/new' component={NewBarChart} />
+					<Route
+						path='/barcharts/:barChartId/comments/:commentId'
+						component={Comment}
+					/>
+					<Route path='/barcharts/:barChartId/tracks/:trackId' component={SingleTrack}/>
+					<Route exact path='/barcharts/new' component={NewBarChart} />
+					<Route path='/barcharts/:barChartId/tracks' component={Tracks} />
 					<Route path='/barcharts/:barChartId' component={SingleBarChart} />
-          <Route path='/barcharts/:barChartId/comments/:commentId' component={Comment} />
 					<Route path='/barcharts' component={BarCharts} />
 					<Route path='/home' component={Home} />
 					<Route exact path='/' component={Login} />

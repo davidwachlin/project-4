@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom'
+import Trackcard from './Trackcard'
 
 export default class Tracks extends Component {
 	state = {
 		tracks: [],
 		isTrackSearchDisplayed: false,
-		newTrack: {},
 	};
 	
 
@@ -21,19 +21,16 @@ export default class Tracks extends Component {
 		});
 	};
 
-	handleChange = (e) => {
-		e.preventDefault()
-		this.e.target.name = this.e.target.value
-		this.setState({})
-	}
+
 
 	render() {
 		let tracksList = this.state.tracks.map(track => {
             return <li key={track._id}>
-            <Link to={`/${this.props.userId}/tracks/${track._id}`}>
+            <Link to={`barcharts/${this.props.match.params.barChartId}/tracks/${track._id}`}>
             {track.name}
             </Link>
-            </li>;
+			</li>;
+			
 		});
 		return (
 			<div>

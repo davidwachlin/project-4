@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import SearchBox from './SearchBox';
 import SpotifyWebApi from 'spotify-web-api-js';
 import Trackcard from '../Trackcard';
 import '../Home.css'

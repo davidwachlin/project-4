@@ -47,9 +47,9 @@ export default class Comment extends Component {
 					isEditFormDisplayed: false
 				});
 			});
-    };
-    
-    handleToggleEditForm = () => {
+	};
+
+	handleToggleEditForm = () => {
 		this.setState(state => {
 			return { isEditFormDisplayed: !state.isEditFormDisplayed };
 		});
@@ -67,23 +67,23 @@ export default class Comment extends Component {
 			});
 	};
 	render() {
-        if (this.state.redirectToBarChart) {
-            return <Redirect to={`/${this.props.match.params.barChartId}`} />;
-        }
-        return this.state.isEditFormDisplayed 
-        ? (<form onSubmit={this.handleSubmit}>
-					<div>
-                    <label htmlFor='comment'>Comment</label>
+		if (this.state.redirectToBarChart) {
+			return <Redirect to={`/barcharts/${this.props.match.params.barChartId}`} />;
+		}
+		return this.state.isEditFormDisplayed ? (
+			<form onSubmit={this.handleSubmit}>
+				<div>
+					<label htmlFor='comment'>Comment</label>
 					<input
 						onChange={this.handleInputChange}
 						type='text'
 						id='comment'
 						name='comment'
 						value={this.state.comment.comment}
-						placeholder='Enter name'
+						placeholder='Enter comment'
 					/>
-                    </div>
-                    <div>
+				</div>
+				<div>
 					<label htmlFor='author'>Author</label>
 					<input
 						onChange={this.handleInputChange}
@@ -93,15 +93,16 @@ export default class Comment extends Component {
 						value={this.state.comment.author}
 						placeholder='Enter name'
 					/>
-                    <input type='submit'>Save</input>
-                    </div>
-
-        </form>
-        ) : (
-            <div>
-                <p>{this.state.comment.comment}</p>
-                <p>By: {this.state.comment.author}</p>
-            </div>
-        )
+					<input type='submit' value='Save' />
+				</div>
+			</form>
+		) : (
+			<div>
+				<p>{this.state.comment.comment}</p>
+				<p>By: {this.state.comment.author}</p>
+				<button onClick={this.handleToggleEditForm}>Edit</button>
+				<button onClick={this.handleDeleteComment}>Delete</button>
+			</div>
+		);
 	}
 }
