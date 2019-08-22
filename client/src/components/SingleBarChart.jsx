@@ -3,7 +3,7 @@ import axios from 'axios';
 import BarChart from './BarChart';
 import SpotifyWebApi from 'spotify-web-api-js';
 import TrackSearch from './TrackSearch/TrackSearch';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import Trackcard from './Trackcard';
 import './Home.css';
 
@@ -28,7 +28,8 @@ export default class SingleBarChart extends Component {
 				comment: '',
 				author: ''
 			},
-			isNewCommentFormDisplayed: false
+			isNewCommentFormDisplayed: false,
+			redirectToHome: false
 		};
 	}
 	componentDidMount() {
@@ -56,6 +57,14 @@ export default class SingleBarChart extends Component {
 				this.setState({ barChart: res.data });
 			});
 	};
+
+	handleDeleteBarChart = () => {
+		axios.delete(`/api/barCharts/${this.props.match.params.barChartId}`).then(() => {
+			this.setState({ redirectToHome: true });
+		});
+	};
+
+
 	getTracks = () => {
 		console.log(this.props.match.params.barChartId);
 		axios
@@ -130,6 +139,9 @@ export default class SingleBarChart extends Component {
 		// 	console.log(track)
 		// 	return <Trackcard track={track} barChartId={this.props.match.params.barChartId} />
 		// })
+		if (this.state.redirectToHome) {
+			return <Redirect to='/home' />;
+		}
 
 		let commentList = this.state.comments.map(comment => (
 			<div key={comment._id}>
@@ -146,6 +158,7 @@ export default class SingleBarChart extends Component {
 		return (
 			<div>
 				<h1>{this.state.barChart.name}</h1>
+				<button onClick={this.handleDeleteBarChart}>Delete Barchart</button>
 
 				{this.state.showSearchBar ? (
 					<div>

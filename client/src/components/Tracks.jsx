@@ -15,7 +15,7 @@ export default class Tracks extends Component {
 	}
 
 	getTracks = () => {
-        axios.get(`/api/barCharts/${this.props.barChartId}/tracks`)
+        axios.get(`/api/barCharts/${this.props.match.params.barChartId}/tracks`)
             .then(res => {
 			    this.setState({ tracks: res.data });
 		});

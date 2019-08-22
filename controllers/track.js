@@ -7,8 +7,8 @@ const trackRouter = express.Router({ mergeParams: true })
 
 
 trackRouter.get('/', (req, res) => {
-  const userId = req.params.userId
-  trackApi.getTracksByUserId(userId)
+  const barChartId = req.params.barChartId
+  trackApi.getTracksByBarChartId(barChartId)
     .then((tracks) => {
       res.json(tracks)
     })
@@ -39,7 +39,7 @@ trackRouter.get('/:trackId', (req, res) => {
 })
 
 trackRouter.post('/', (req, res) => {
-  req.body.userId = req.params.userId
+  req.body.barChartId = req.params.barChartId
   trackApi.addNewTrack(req.body)
     .then((track) => {
       res.json(track)

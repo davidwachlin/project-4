@@ -26,12 +26,10 @@ const TrackSchema = new mongoose.Schema({
 const TrackCollection = mongoose.model('Track', TrackSchema)
 
 
-function getAllTracks() {
-  return TrackCollection.find()
-}
 
-function getTracksByUserId(userId) {
-  return TrackCollection.find({userId: userId})
+
+function getTracksByBarChartId(barChartId) {
+  return TrackCollection.find({barChartId: barChartId})
 }
 
 function getTrack(trackId) {
@@ -59,9 +57,8 @@ function addTracks(tracks) {
 }
 
 module.exports = {
-  getAllTracks,
+  getTracksByBarChartId,
   getTrack,
-  getTracksByUserId,
   addNewTrack,
   updateTrack,
   deleteTrack,
