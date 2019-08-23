@@ -5,6 +5,9 @@ import SpotifyWebApi from 'spotify-web-api-js';
 import TrackSearch from './TrackSearch/TrackSearch';
 import { Link, Redirect } from 'react-router-dom';
 import Trackcard from './Trackcard';
+
+
+import Button from '@material-ui/core/Button';
 import './Home.css';
 
 const spotifyApi = new SpotifyWebApi();
@@ -158,11 +161,12 @@ export default class SingleBarChart extends Component {
 		return (
 			<div>
 				<h1>{this.state.barChart.name}</h1>
-				<button onClick={this.handleDeleteBarChart}>Delete Barchart</button>
+				<p>{this.state.barChart.graphFeature}</p>
+				<Button variant="outlined" color="primary" onClick={this.handleDeleteBarChart}>Delete Barchart</Button>
 
 				{this.state.showSearchBar ? (
 					<div>
-						<button onClick={this.handleShowSearchBar}>Done</button>
+						<Button variant="outlined" color="primary" onClick={this.handleShowSearchBar}>Done</Button>
 						<TrackSearch barChartId={this.props.match.params.barChartId} />
 					</div>
 				) : (
@@ -173,7 +177,7 @@ export default class SingleBarChart extends Component {
 								Tracks
 							</Link>
 						</div>
-						<button onClick={this.handleShowSearchBar}>Add Tracks</button>
+						<Button variant="outlined" color="primary" onClick={this.handleShowSearchBar}>Add Tracks</Button>
 
 						<BarChart
 							data={this.state.tracksWithFeatures}
@@ -208,9 +212,9 @@ export default class SingleBarChart extends Component {
 								<h5>Comments</h5>
 								{commentList}
 
-								<button onClick={this.handleToggleNewCommentForm}>
+								<Button variant="outlined" color="primary" onClick={this.handleToggleNewCommentForm}>
 									New Comment
-								</button>
+								</Button>
 							</div>
 						)}
 					</div>

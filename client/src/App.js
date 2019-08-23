@@ -11,10 +11,41 @@ import BarCharts from './components/BarCharts';
 import SingleBarChart from './components/SingleBarChart';
 import Comment from './components/Comment';
 import Tracks from './components/Tracks'
+
+//style imports
+import { ThemeProvider } from '@material-ui/styles';
+import { createMuiTheme } from '@material-ui/core/styles';
+
 import './App.css';
+
+
+
+
+
+const theme = createMuiTheme({
+  palette: {
+	primary: {
+    //   light: '#b0ff57',
+      main: '#1DB954'
+    //   dark: '#32cb00',
+    //   contrastText: '#000000'
+
+	  ,
+    },
+    secondary: {
+      light: '#ff7961',
+      main: '#f44336',
+      dark: '#ba000d',
+      contrastText: '#000',
+    },
+  },
+
+});
+
 
 function App() {
 	return (
+		<ThemeProvider theme={theme}>
 		<div className='App'>
 			<Router>
 				<Switch>
@@ -34,6 +65,7 @@ function App() {
 				</Switch>
 			</Router>
 		</div>
+		</ThemeProvider>
 	);
 }
 

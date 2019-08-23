@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 import axios from 'axios';
+import Button from '@material-ui/core/Button';
 
 export default class Comment extends Component {
 	state = {

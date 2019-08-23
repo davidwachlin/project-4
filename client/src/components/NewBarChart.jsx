@@ -41,7 +41,7 @@ export default class NewBarChart extends Component {
 						placeholder='Enter name'
 					/>
 					<label htmlFor='barchart-graphfeature'>Graph Feature</label>
-					<select value={this.state.newBarChart.graphFeature} id='barchart-graphfeature' onChange={this.handleChange}>
+					<select value={this.state.newBarChart.graphFeature} id='barchart-graphfeature' name='graphFeature' onChange={this.handleChange}>
 						<option value='duration_ms'>Duration</option>
 						<option value='acousticness'>Acousticness</option>
 						<option value='danceability'>Danceability</option>
