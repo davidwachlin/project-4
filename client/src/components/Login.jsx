@@ -11,7 +11,7 @@ import Link from '@material-ui/core/Link'
 
 export const authEndpoint = 'https://accounts.spotify.com/authorize';
 const localRedirectUri  = 'http://localhost:3000';
-const herokuRedirectUri = 'https://lit-crag-54993.herokuapp.com/'
+const herokuRedirectUri = 'https://lit-crag-54993.herokuapp.com'
 // Replace with your app's client ID, redirect URI and desired scopes
 const clientId = 'baf17787c2f143b594964abf61d5ae74';
 // const redirectUri = localRedirectUri
