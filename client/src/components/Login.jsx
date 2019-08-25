@@ -54,13 +54,13 @@ class Login extends Component {
 				<header className='Login-header'>
 					<div><img src={logo} className='Login-logo' alt='logo' /></div>
 					{!this.state.token && (
-						<a
+						<Link
 							className='btn btn--login Login-link'
 							href={`${authEndpoint}?client_id=${clientId}&redirect_uri=${redirectUri}&scope=${scopes.join(
 								'%20'
 							)}&response_type=token&show_dialog=true`}>
 							Login to Spotify
-						</a>
+						</Link>
 					)}
 					{this.state.token && (
 						<Redirect to='/home' />

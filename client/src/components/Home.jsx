@@ -4,7 +4,9 @@ import axios from 'axios';
 import Trackcard from './Trackcard'
 import BarChart from './BarChart'
 import { Link } from 'react-router-dom'
-import TrackSearch from './TrackSearch/TrackSearch'
+// import TrackSearch from './TrackSearch/TrackSearch'
+// import GridList from '@material-ui/core/GridList'
+import Tracks from './Tracks'
 
 //style imports
 import './Home.css'
@@ -137,7 +139,9 @@ export default class Home extends Component {
 				<div>{this.state.currentUser.email}</div>
 				<h1>Top Tracks for {this.state.currentUser.id}</h1>
 				<div className="track-list">
-				{tracksList}
+				{/* <GridList cols={2.5}>{tracksList}</GridList> */}
+				<Tracks tracks={this.state.tracksWithFeatures}/>
+				
 
 				</div>
 				

@@ -5,8 +5,7 @@ import SpotifyWebApi from 'spotify-web-api-js';
 import TrackSearch from './TrackSearch/TrackSearch';
 import { Link, Redirect } from 'react-router-dom';
 import Trackcard from './Trackcard';
-import Tracks from './Tracks'
-
+import Tracks from './Tracks';
 
 import Button from '@material-ui/core/Button';
 import './Home.css';
@@ -33,12 +32,14 @@ export default class SingleBarChart extends Component {
 				author: ''
 			},
 			isNewCommentFormDisplayed: false,
-			redirectToHome: false
+			redirectToHome: false,
+			formattedTracks: []
 		};
 	}
 	componentDidMount() {
+		console.log('singlebarchart component did mount')
 		this.getBarChart();
-		this.getTracks();
+		// this.getTracks();
 		this.getCommments();
 		// this.attachTrackAudioFeatures()
 	}
@@ -53,7 +54,12 @@ export default class SingleBarChart extends Component {
 		if (prevState.tracksAudioFeatures !== this.state.tracksAudioFeatures) {
 			this.attachTrackAudioFeatures();
 		}
+		if (prevState.tracksWithFeatures !== this.state.tracksWithFeatures) {
+			this.formatTracks()
+		}
 	}
+
+
 	getBarChart = () => {
 		axios
 			.get(`/api/barCharts/${this.props.match.params.barChartId}`)
@@ -63,22 +69,34 @@ export default class SingleBarChart extends Component {
 	};
 
 	handleDeleteBarChart = () => {
-		axios.delete(`/api/barCharts/${this.props.match.params.barChartId}`).then(() => {
-			this.setState({ redirectToHome: true });
-		});
+		axios
+			.delete(`/api/barCharts/${this.props.match.params.barChartId}`)
+			.then(() => {
+				this.setState({ redirectToHome: true });
+			});
 	};
-
 
 	getTracks = () => {
 		console.log('from single barchart', this.props.match.params.barChartId);
 		axios
 			.get(`/api/barCharts/${this.props.match.params.barChartId}/tracks`)
 			.then(res => {
-				console.log(res.data);
+				console.log('from get tracks', res.data);
 				this.setState({ tracks: res.data });
 			});
 	};
 
+	formatTracks = () => {
+		let editTracks = []
+		this.state.tracks.forEach(track => {
+			track.album = track.album[0]
+			editTracks.push(track)
+			console.log('from formatTracks 2', track)
+		})
+		console.log('from formatTracks 3 editTracks:', editTracks)
+		this.setState({ formattedTracks: editTracks })
+		
+	}
 	getCommments = () => {
 		axios
 			.get(`/api/barCharts/${this.props.match.params.barChartId}/comments`)
@@ -90,7 +108,7 @@ export default class SingleBarChart extends Component {
 	getTrackAudioFeatures = () => {
 		let trackIds = this.state.tracks.map(track => track.id);
 		spotifyApi.getAudioFeaturesForTracks(trackIds).then(response => {
-			console.log(response);
+			console.log('from get track audio features', response);
 			this.setState({ tracksAudioFeatures: response.audio_features });
 		});
 	};
@@ -102,8 +120,8 @@ export default class SingleBarChart extends Component {
 			tracksWithFeatures.push(Object.assign({}, track, tracksAudioFeatures[i]));
 		});
 		this.setState({ tracksWithFeatures: tracksWithFeatures });
-		console.log(`tracksWithFeatures:`);
-		console.log(tracksWithFeatures);
+
+		console.log('tracks with features:', tracksWithFeatures);
 	}
 
 	handleShowSearchBar = () => {
@@ -133,9 +151,8 @@ export default class SingleBarChart extends Component {
 			)
 			.then(() => {
 				this.handleToggleNewCommentForm();
-				this.getCommments()
+				this.getCommments();
 			});
-
 	};
 
 	render() {
@@ -152,9 +169,7 @@ export default class SingleBarChart extends Component {
 				<p>{comment.comment}</p>
 				<p>By: {comment.author}</p>
 				<Link
-					to={`/barcharts/${this.props.match.params.barChartId}/comments/${
-						comment._id
-					}`}>
+					to={`/barcharts/${this.props.match.params.barChartId}/comments/${comment._id}`}>
 					View/Edit
 				</Link>
 			</div>
@@ -163,23 +178,41 @@ export default class SingleBarChart extends Component {
 			<div>
 				<h1>{this.state.barChart.name}</h1>
 				<p>{this.state.barChart.graphFeature}</p>
-				<Button variant="outlined" color="primary" onClick={this.handleDeleteBarChart}>Delete Barchart</Button>
+				<Button
+					variant='outlined'
+					color='primary'
+					onClick={this.handleDeleteBarChart}>
+					Delete Barchart
+				</Button>
 
 				{this.state.showSearchBar ? (
 					<div>
-						<Button variant="outlined" color="primary" onClick={this.handleShowSearchBar}>Done</Button>
+						<Button
+							variant='outlined'
+							color='primary'
+							onClick={this.handleShowSearchBar}>
+							Done
+						</Button>
 						<TrackSearch barChartId={this.props.match.params.barChartId} />
 					</div>
 				) : (
 					<div>
 						<div>
-							<Tracks barChartId={this.props.match.params.barChartId} />
+							<Tracks
+								tracks={this.state.formattedTracks}
+								barChartId={this.props.match.params.barChartId}
+							/>
 							<Link
 								to={`/barcharts/${this.props.match.params.barChartId}/tracks`}>
 								Tracks
 							</Link>
 						</div>
-						<Button variant="outlined" color="primary" onClick={this.handleShowSearchBar}>Add Tracks</Button>
+						<Button
+							variant='outlined'
+							color='primary'
+							onClick={this.handleShowSearchBar}>
+							Add Tracks
+						</Button>
 
 						<BarChart
 							data={this.state.tracksWithFeatures}
@@ -214,7 +247,10 @@ export default class SingleBarChart extends Component {
 								<h5>Comments</h5>
 								{commentList}
 
-								<Button variant="outlined" color="primary" onClick={this.handleToggleNewCommentForm}>
+								<Button
+									variant='outlined'
+									color='primary'
+									onClick={this.handleToggleNewCommentForm}>
 									New Comment
 								</Button>
 							</div>
