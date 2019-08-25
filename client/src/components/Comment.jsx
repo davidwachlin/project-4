@@ -1,7 +1,11 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 import axios from 'axios';
+
+//style imports
 import Button from '@material-ui/core/Button';
+import TextField from '@material-ui/core/TextField';
+import Container from '@material-ui/core/Container';
 
 export default class Comment extends Component {
 	state = {
@@ -69,34 +73,45 @@ export default class Comment extends Component {
 	};
 	render() {
 		if (this.state.redirectToBarChart) {
-			return <Redirect to={`/barcharts/${this.props.match.params.barChartId}`} />;
+			return (
+				<Redirect to={`/barcharts/${this.props.match.params.barChartId}`} />
+			);
 		}
 		return this.state.isEditFormDisplayed ? (
-			<form onSubmit={this.handleSubmit}>
-				<div>
-					<label htmlFor='comment'>Comment</label>
-					<input
-						onChange={this.handleInputChange}
-						type='text'
-						id='comment'
-						name='comment'
-						value={this.state.comment.comment}
-						placeholder='Enter comment'
-					/>
-				</div>
-				<div>
-					<label htmlFor='author'>Author</label>
-					<input
-						onChange={this.handleInputChange}
-						type='text'
-						id='author'
-						name='author'
-						value={this.state.comment.author}
-						placeholder='Enter name'
-					/>
-					<input type='submit' value='Save' />
-				</div>
-			</form>
+			<Container>
+				<form onSubmit={this.handleSubmit}>
+					<div>
+						<TextField
+							id='outlined-commenet-input'
+							multiline
+							label='Comment'
+							className='textField'
+							type='text'
+							name='comment'
+							autoComplete='Your comment...'
+							margin='normal'
+							variant='outlined'
+							onChange={this.handleInputChange}
+							value={this.state.comment.comment}
+						/>
+					</div>
+					<div>
+						<TextField
+							id='outlined-author-input'
+							label='Author'
+							className='textField'
+							type='text'
+							name='author'
+							autoComplete='Your name...'
+							margin='normal'
+							variant='outlined'
+							onChange={this.handleInputChange}
+							value={this.state.comment.author}
+						/>
+						<input type='submit' value='Save' />
+					</div>
+				</form>
+			</Container>
 		) : (
 			<div>
 				<p>{this.state.comment.comment}</p>

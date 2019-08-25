@@ -4,8 +4,12 @@ import axios from 'axios';
 import Trackcard from './Trackcard'
 import BarChart from './BarChart'
 import { Link } from 'react-router-dom'
-import './Home.css'
 import TrackSearch from './TrackSearch/TrackSearch'
+
+//style imports
+import './Home.css'
+import Container from '@material-ui/core/Container';
+import Paper from '@material-ui/core/Paper'
 
 const spotifyApi = new SpotifyWebApi();
 
@@ -126,20 +130,21 @@ export default class Home extends Component {
 
 		
 		return (
-			<div className='Home'>
-
-				<h2>Welcome {this.state.currentUser.id}</h2>
+			<Container className='Home'>
+				<h1>SpotiViz</h1>
 				<Link to='/barcharts/'>All BarCharts</Link>
 
 				<div>{this.state.currentUser.email}</div>
-				<h3>Your Top Tracks</h3>
+				<h1>Top Tracks for {this.state.currentUser.id}</h1>
 				<div className="track-list">
 				{tracksList}
 
 				</div>
+				
 				<BarChart data={this.state.tracksWithFeatures} />
 
-			</div>
+
+			</Container>
 		);
 	}
 }

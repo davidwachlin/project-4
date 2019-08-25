@@ -5,6 +5,7 @@ import SpotifyWebApi from 'spotify-web-api-js';
 import TrackSearch from './TrackSearch/TrackSearch';
 import { Link, Redirect } from 'react-router-dom';
 import Trackcard from './Trackcard';
+import Tracks from './Tracks'
 
 
 import Button from '@material-ui/core/Button';
@@ -69,7 +70,7 @@ export default class SingleBarChart extends Component {
 
 
 	getTracks = () => {
-		console.log(this.props.match.params.barChartId);
+		console.log('from single barchart', this.props.match.params.barChartId);
 		axios
 			.get(`/api/barCharts/${this.props.match.params.barChartId}/tracks`)
 			.then(res => {
@@ -172,6 +173,7 @@ export default class SingleBarChart extends Component {
 				) : (
 					<div>
 						<div>
+							<Tracks barChartId={this.props.match.params.barChartId} />
 							<Link
 								to={`/barcharts/${this.props.match.params.barChartId}/tracks`}>
 								Tracks

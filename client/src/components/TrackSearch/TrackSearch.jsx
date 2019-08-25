@@ -1,9 +1,14 @@
 import React, { Component } from 'react';
 import SpotifyWebApi from 'spotify-web-api-js';
 import Trackcard from '../Trackcard';
-import '../Home.css'
-import axios from 'axios'
-import '../Trackcard.css'
+import axios from 'axios';
+
+//style imports
+import '../Home.css';
+import '../Trackcard.css';
+import Button from '@material-ui/core/Button';
+import TextField from '@material-ui/core/TextField';
+import Container from '@material-ui/core/Container';
 
 const spotifyApi = new SpotifyWebApi();
 
@@ -34,32 +39,43 @@ export default class TrackSearch extends Component {
 		});
 	};
 
-
-
 	render() {
 		const { searchTracks } = this.state;
 		const tracksList = !searchTracks.length
 			? null
 			: searchTracks.map(track => {
-					return <Trackcard track={track} barChartId={this.props.barChartId} />
-					
-			})
+					return <Trackcard track={track} barChartId={this.props.barChartId} />;
+			  });
 
 		return (
 			<div>
 				<form onSubmit={this.handleSubmit}>
-					<label htmlFor='search' />
-					<input
-						className='search'
+					<TextField
+						id='outlined-search-input'
+						label='track'
+						className='textField'
 						type='search'
-						placeholder='Search tracks'
+						name='search'
+						autoComplete='track'
+						margin='normal'
+						variant='outlined'
 						onChange={this.handleChange}
+						value={this.state.searchField}
 					/>
+					<div>
+						<label htmlFor='submit-form'>
+							<Button variant='contained' component='span'>
+								Search
+								<input
+									id='submit-form'
+									type='submit'
+									style={{ display: 'none' }}
+								/>
+							</Button>
+						</label>
+					</div>
 				</form>
-				<div className='track-list'>
-
-				{tracksList}
-				</div>
+				<div className='track-list'>{tracksList}</div>
 			</div>
 		);
 	}

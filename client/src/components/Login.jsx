@@ -2,8 +2,12 @@ import React, { Component } from 'react';
 import getHashAndRedirect from '../helpers';
 import logo from '../Spotify_logo_without_text.svg';
 import { Redirect } from 'react-router-dom'
+import Container from '@material-ui/core/Container';
 
+//style imports
 // import "./Login.css";
+import Link from '@material-ui/core/Link'
+
 
 export const authEndpoint = 'https://accounts.spotify.com/authorize';
 
@@ -46,7 +50,7 @@ class Login extends Component {
 	}
 	render() {
 		return (
-			<div className='Login'>
+			// <Container className='Login'>
 				<header className='Login-header'>
 					<div><img src={logo} className='Login-logo' alt='logo' /></div>
 					{!this.state.token && (
@@ -62,7 +66,7 @@ class Login extends Component {
 						<Redirect to='/home' />
 					)}
 				</header>
-			</div>
+			// </Container>
 		);
 	}
 }

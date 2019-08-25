@@ -1,38 +1,54 @@
 import React, { Component } from 'react';
-import { VictoryBar, VictoryChart, VictoryAxis, VictoryTheme } from 'victory';
+import {
+	VictoryBar,
+	VictoryChart,
+	VictoryAxis,
+	VictoryTheme,
+	VictoryLabel
+} from 'victory';
+
 
 export default class BarChart extends Component {
+	static defaultProps = {
+		graphFeature: 'energy'
+	};
 
-		static defaultProps = {
-			graphFeature: 'energy'
+	getStyles() {
+		return {
+			axisOne: {
+				fill: 'white'
+			  }
 		}
-	
-
+	}
 	render() {
+		const styles = this.getStyles();
 		const { data } = this.props;
 		const { graphFeature } = this.props;
 
 		console.log('from barchart', data);
 
-
-
 		return (
-			<VictoryChart domainPadding={20} >
+			<VictoryChart domainPadding={20}>
 				<VictoryAxis
 					// tickValues specifies both the number of ticks and where
 					// they are placed on the axis
 					// tickValues={[1, 2, 3, 4]}
-                        tickFormat={x => `${x}`}
+					tickFormat={x => `${x}`}
 				/>
 				<VictoryAxis
-
-                    dependentAxis
+					dependentAxis
 					// tickFormat specifies how ticks should be displayed
-                    tickFormat={x => `${x}`}
+					tickFormat={x => `${x}`}
+					style={styles.axisOne}
 
 				/>
+				<VictoryBar
+					style={{ data: { fill: '#56FA71' } }}
 
-				<VictoryBar style={{ data: { fill: "#56FA71" } }} data={data} x='name' y={graphFeature}  />
+					data={data}
+					x='name'
+					y={graphFeature}
+				/>
 			</VictoryChart>
 		);
 	}
