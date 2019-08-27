@@ -88,7 +88,8 @@ export default class SingleBarChart extends Component {
 
 	formatTracks = () => {
 		let editTracks = []
-		this.state.tracks.forEach(track => {
+		let trackCopy =  { ...this.state.tracks }
+		trackCopy.forEach(track => {
 			track.album = track.album[0]
 			editTracks.push(track)
 			console.log('from formatTracks 2', track)

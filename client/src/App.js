@@ -11,6 +11,7 @@ import BarCharts from './components/BarCharts';
 import SingleBarChart from './components/SingleBarChart';
 import Comment from './components/Comment';
 import Tracks from './components/Tracks';
+import Navbar from './components/Navbar'
 
 //style imports
 import { ThemeProvider } from '@material-ui/styles';
@@ -32,6 +33,7 @@ function App() {
 		<ThemeProvider theme={theme}>
 			<div className='App'>
 				<Router>
+					<Navbar />
 					<Switch>
 						<Route
 							path='/barcharts/:barChartId/tracks/:trackId'
