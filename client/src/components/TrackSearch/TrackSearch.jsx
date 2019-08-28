@@ -44,7 +44,13 @@ export default class TrackSearch extends Component {
 		const tracksList = !searchTracks.length
 			? null
 			: searchTracks.map(track => {
-					return <Trackcard track={track} barChartId={this.props.barChartId} />;
+					return (
+						<Trackcard
+							track={track}
+							barChartId={this.props.barChartId}
+							showRemove={this.props.showRemove}
+						/>
+					);
 			  });
 
 		return (

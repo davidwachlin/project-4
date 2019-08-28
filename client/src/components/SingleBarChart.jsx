@@ -8,7 +8,7 @@ import BarChart from './BarChart';
 import TrackSearch from './TrackSearch/TrackSearch';
 import Tracks from './Tracks';
 import Comments from './Comments';
-import Card from '@material-ui/core/Card'
+import Card from '@material-ui/core/Card';
 import Container from '@material-ui/core/Container';
 import Button from '@material-ui/core/Button';
 import { Divider } from '@material-ui/core';
@@ -43,7 +43,6 @@ export default class SingleBarChart extends Component {
 			formattedTracks: [],
 			showRemove: true,
 			redirectToBarChart: false
-
 		};
 	}
 	componentDidMount() {
@@ -169,7 +168,10 @@ export default class SingleBarChart extends Component {
 							onClick={this.handleShowSearchBar}>
 							Done
 						</Button>
-						<TrackSearch barChartId={this.props.match.params.barChartId} />
+						<TrackSearch
+							barChartId={this.props.match.params.barChartId}
+							showRemove={this.state.showRemove}
+						/>
 					</div>
 				) : (
 					<div>
@@ -183,8 +185,8 @@ export default class SingleBarChart extends Component {
 								size='small'>
 								Delete
 							</Button>
-								</Box>
-							<Divider />
+						</Box>
+						<Divider />
 
 						<div>
 							<Tracks
@@ -209,10 +211,16 @@ export default class SingleBarChart extends Component {
 							<br></br>
 						</Box>
 						<Card>
-						<Typography variant='h5' gutterBottom className='tracks-description'>
+							<Typography
+								variant='h5'
+								gutterBottom
+								className='tracks-description'>
 								Description
 							</Typography>
-						<Typography variant='body1' gutterBottom className='tracks-description'>
+							<Typography
+								variant='body1'
+								gutterBottom
+								className='tracks-description'>
 								{this.state.barChart.description}
 							</Typography>
 						</Card>
