@@ -13,7 +13,7 @@ import CardActionArea from '@material-ui/core/CardActionArea';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
-import GridListTile from '@material-ui/core/GridListTile'
+import GridListTile from '@material-ui/core/GridListTile';
 
 const styles = {
 	card: {
@@ -47,16 +47,18 @@ export default class Trackcard extends Component {
 	deleteTrack = () => {
 		axios
 			.delete(
-				`/api/barCharts/${this.props.barChartId}/tracks`,
-				this.props.track._id
+				`/api/barCharts/${this.props.barChartId}/tracks/${this.props.track._id}`
 			)
-			.then(res => console.log(res));
+			.then(res => {
+				this.setState({ redirectToBarChart: true });
+			})
 	};
 
 	render() {
-
 		const imgUrl = this.props.imgUrl || this.props.track.album.images[1].url;
-
+		if (this.state.redirectToBarChart) {
+			return <Redirect to={`/barcharts/${this.props.barChartId}`} />;
+		}
 		return (
 			<GridListTile>
 				<Card className='Trackcard card' style={styles.card}>
@@ -83,7 +85,14 @@ export default class Trackcard extends Component {
 							onClick={this.addTrackToBarChart}>
 							Add
 						</Button>
-						{/* <button onClick={this.addTrackToBarChart}>Add</button> */}
+						{this.props.showRemove ? (
+							<Button
+								size='small'
+								color='red'
+								onClick={this.deleteTrack}>
+								Remove
+							</Button>
+						) : null}
 					</CardActions>
 				</Card>
 			</GridListTile>

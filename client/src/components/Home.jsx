@@ -38,7 +38,8 @@ export default class Home extends Component {
 			},
 			topTracks: [],
 			topTrackAudioFeatures: [],
-			tracksWithFeatures: []
+			tracksWithFeatures: [],
+			showRemove: false
 		};
 	}
 	componentDidMount() {
@@ -133,7 +134,7 @@ export default class Home extends Component {
 				</Box>
 				<div className='track-list'>
 					{/* <GridList cols={2.5}>{tracksList}</GridList> */}
-					<Tracks tracks={this.state.tracksWithFeatures} />
+					<Tracks tracks={this.state.tracksWithFeatures} showRemove={this.state.showRemove}/>
 				</div>
 				<Box> </Box>
 				<Box className='barchart-title'>

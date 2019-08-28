@@ -40,7 +40,8 @@ export default class SingleBarChart extends Component {
 			},
 			isNewCommentFormDisplayed: false,
 			redirectToHome: false,
-			formattedTracks: []
+			formattedTracks: [],
+			showRemove: true
 		};
 	}
 	componentDidMount() {
@@ -163,6 +164,7 @@ export default class SingleBarChart extends Component {
 							<Tracks
 								tracks={this.state.formattedTracks}
 								barChartId={this.props.match.params.barChartId}
+								showRemove={this.state.showRemove}
 							/>
 						</div>
 						<Button

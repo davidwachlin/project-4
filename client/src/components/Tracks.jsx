@@ -43,6 +43,7 @@ export default function Tracks(props) {
 							track={track}
 							barChartId={props.barChartId}
 							imgUrl={track.album.images[1].url || track.album[0].images[1].url}
+							showRemove={props.showRemove}
 						/>
 					);
 				})}
