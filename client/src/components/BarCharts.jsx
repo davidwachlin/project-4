@@ -11,7 +11,6 @@ import CardMedia from '@material-ui/core/CardMedia';
 import CardContent from '@material-ui/core/CardContent';
 import CardActions from '@material-ui/core/CardActions';
 import Card from '@material-ui/core/Card';
-
 import { ListItem } from '@material-ui/core';
 import List from '@material-ui/core/List';
 import Divider from '@material-ui/core/Divider';
@@ -36,25 +35,29 @@ export default class BarCharts extends Component {
 		console.log('render!');
 		let barChartsList = this.state.barCharts.map(barchart => {
 			return (
-				<ListItem key={barchart._id}>
+				<Grid item key={barchart._id} xs={12} sm={6}>
 					<Card>
 						<CardContent>
-							<Typography variant="h5" gutterBottom >
-
-								<Link component={RouterLink} to={`/barcharts/${barchart._id}`}>{barchart.name}</Link>
+							<Typography variant='h5' gutterBottom>
+								<Link component={RouterLink} to={`/barcharts/${barchart._id}`}>
+									{barchart.name}
+								</Link>
 							</Typography>
 						</CardContent>
 					</Card>
-				</ListItem>
+				</Grid>
 			);
 		});
 		return (
 			<Container>
 				<h1>All BarCharts</h1>
-				<List component='ul'>{barChartsList}</List>
+				<Grid container spacing={4} className='cardGrid'>
+					{barChartsList}
+				</Grid>
 				<Typography gutterBottom variant='h6'></Typography>
-                <Link component={RouterLink} to="/barcharts/new">New BarChart</Link>
-
+				<Link component={RouterLink} to='/barcharts/new'>
+					New BarChart
+				</Link>
 			</Container>
 		);
 	}

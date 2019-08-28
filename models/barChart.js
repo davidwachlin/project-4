@@ -6,7 +6,11 @@ var Types = require('mongoose-easy-types').Types;
 const BarChartSchema = new mongoose.Schema({
   name: String,
   graphFeature: String,
-
+  description: String,
+  createdAt: {
+    type: Date,
+    default: Date.now
+  },
 })
 
 
