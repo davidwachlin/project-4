@@ -8,9 +8,9 @@ import {
 } from 'victory';
 
 export default class BarChart extends Component {
-	static defaultProps = {
-		graphFeature: 'energy'
-	};
+	// static defaultProps = {
+	// 	graphFeature: ''
+	// };
 
 	getStyles() {
 		return {

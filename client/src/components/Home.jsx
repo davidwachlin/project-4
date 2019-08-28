@@ -143,7 +143,7 @@ export default class Home extends Component {
 					<Divider />
 				</Box>
 
-				<BarChart data={this.state.tracksWithFeatures} />
+				<BarChart data={this.state.tracksWithFeatures} graphFeature='energy'/>
 			</Container>
 		);
 	}
