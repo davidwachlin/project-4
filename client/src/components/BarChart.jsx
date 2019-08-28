@@ -38,7 +38,13 @@ export default class BarChart extends Component {
 							<VictoryContainer/>
 						  }>
 						<VictoryAxis
-							tickFormat={x => `${x}`}
+							tickFormat={x => {
+								return (
+								x.length > 16
+								? x.substring(0, 15) + '...'
+								: `${x}`
+								)
+							}}
 							style={{
 								axis: { stroke: 'white' },
 								ticks: { stroke: 'white' },

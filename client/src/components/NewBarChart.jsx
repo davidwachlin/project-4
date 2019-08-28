@@ -140,7 +140,7 @@ export default class NewBarChart extends Component {
 							<Box className='NewBarChart-input'>
 								<label htmlFor='submit-form'>
 									<Button variant='contained' component='span'>
-										Create Library
+										Create TrackGraph
 										<input
 											id='submit-form'
 											type='submit'
