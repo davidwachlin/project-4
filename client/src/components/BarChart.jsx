@@ -9,6 +9,8 @@ import {
 	VictoryTooltip
 } from 'victory';
 
+import Box from '@material-ui/core/Box'
+
 export default class BarChart extends Component {
 	getStyles() {
 		return {
@@ -27,7 +29,7 @@ export default class BarChart extends Component {
 		console.log('from barchart data:', data);
 
 		return (
-			<div>
+			<Box width='100%'>
 					<VictoryChart
 						padding={{ left: 90, top: 10, right: 10, bottom: 50 }}
 						domainPadding={20}
@@ -72,7 +74,7 @@ export default class BarChart extends Component {
 						/>
 					</VictoryChart>
 				
-			</div>
+			</Box>
 		);
 	}
 }

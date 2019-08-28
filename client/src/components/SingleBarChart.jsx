@@ -8,13 +8,14 @@ import BarChart from './BarChart';
 import TrackSearch from './TrackSearch/TrackSearch';
 import Tracks from './Tracks';
 import Comments from './Comments';
-
+import Card from '@material-ui/core/Card'
 import Container from '@material-ui/core/Container';
 import Button from '@material-ui/core/Button';
 import { Divider } from '@material-ui/core';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import './Home.css';
+import './SingleBarChart.css';
 
 const spotifyApi = new SpotifyWebApi();
 
@@ -133,14 +134,6 @@ export default class SingleBarChart extends Component {
 
 		return (
 			<Container>
-				<h1>{this.state.barChart.name}</h1>
-				<Button
-					variant='outlined'
-					color='primary'
-					onClick={this.handleDeleteBarChart}>
-					Delete Barchart
-				</Button>
-
 				{this.state.showSearchBar ? (
 					<div>
 						<Button
@@ -157,8 +150,15 @@ export default class SingleBarChart extends Component {
 							<Typography variant='h4' gutterBottom className='tracks-title'>
 								Tracks for {this.state.barChart.name}
 							</Typography>
+							<Button
+								color='primary'
+								onClick={this.handleDeleteBarChart}
+								size='small'>
+								Delete
+							</Button>
+								</Box>
 							<Divider />
-						</Box>
+
 						<div>
 							<Tracks
 								tracks={this.state.formattedTracks}
@@ -176,7 +176,18 @@ export default class SingleBarChart extends Component {
 							data={this.state.tracksWithFeatures}
 							graphFeature={this.state.barChart.graphFeature}
 						/>
-
+						<Divider></Divider>
+						<Box>
+							<br></br>
+						</Box>
+						<Card>
+						<Typography variant='h5' gutterBottom className='tracks-description'>
+								Description
+							</Typography>
+						<Typography variant='body1' gutterBottom className='tracks-description'>
+								{this.state.barChart.description}
+							</Typography>
+						</Card>
 						<Comments barChartId={this.props.match.params.barChartId} />
 					</div>
 				)}

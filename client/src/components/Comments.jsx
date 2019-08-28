@@ -57,20 +57,20 @@ export default class Comments extends Component {
 
 	render() {
 		let commentList = this.state.comments.map(comment => (
-			<Card key={comment._id}>
+			<Box key={comment._id}>
 				<Typography variant='subtitle1' component='p'>
 					{comment.comment}
 				</Typography>
 				<Typography variant='subtitle2' component='p'>
 					<p>By: {comment.author}</p>
 				</Typography>
-				<Button>
-					<Link
-						to={`/barcharts/${this.props.barChartId}/comments/${comment._id}`}>
-						View/Edit
-					</Link>
-				</Button>
-			</Card>
+
+				<Link
+					to={`/barcharts/${this.props.barChartId}/comments/${comment._id}`}>
+					<Button>View/Edit</Button>
+				</Link>
+				<Divider></Divider>
+			</Box>
 		));
 		return (
 			<div>
@@ -96,17 +96,21 @@ export default class Comments extends Component {
 						<input type='submit' value='Add' />
 					</form>
 				) : (
-					<div>
-						<h5>Comments</h5>
+					<Container width='50%'>
+						<Typography variant='h6' component='h6'>
+							Comments
+						</Typography>
+						<Divider></Divider>
 						{commentList}
 
 						<Button
 							variant='outlined'
+							size='small'
 							color='primary'
 							onClick={this.handleToggleNewCommentForm}>
 							New Comment
 						</Button>
-					</div>
+					</Container>
 				)}
 			</div>
 		);
