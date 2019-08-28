@@ -25,11 +25,9 @@ export default class Comments extends Component {
 	}
 
 	getCommments = () => {
-		axios
-			.get(`/api/barCharts/${this.props.barChartId}/comments`)
-			.then(res => {
-				this.setState({ comments: res.data });
-			});
+		axios.get(`/api/barCharts/${this.props.barChartId}/comments`).then(res => {
+			this.setState({ comments: res.data });
+		});
 	};
 
 	handleToggleNewCommentForm = () => {
@@ -60,12 +58,18 @@ export default class Comments extends Component {
 	render() {
 		let commentList = this.state.comments.map(comment => (
 			<Card key={comment._id}>
-				<p>{comment.comment}</p>
-				<p>By: {comment.author}</p>
-				<Link
-					to={`/barcharts/${this.props.barChartId}/comments/${comment._id}`}>
-					View/Edit
-				</Link>
+				<Typography variant='subtitle1' component='p'>
+					{comment.comment}
+				</Typography>
+				<Typography variant='subtitle2' component='p'>
+					<p>By: {comment.author}</p>
+				</Typography>
+				<Button>
+					<Link
+						to={`/barcharts/${this.props.barChartId}/comments/${comment._id}`}>
+						View/Edit
+					</Link>
+				</Button>
 			</Card>
 		));
 		return (

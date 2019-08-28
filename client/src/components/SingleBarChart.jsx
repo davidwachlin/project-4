@@ -134,7 +134,6 @@ export default class SingleBarChart extends Component {
 		return (
 			<Container>
 				<h1>{this.state.barChart.name}</h1>
-				<p>{this.state.barChart.graphFeature}</p>
 				<Button
 					variant='outlined'
 					color='primary'
