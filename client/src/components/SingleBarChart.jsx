@@ -41,7 +41,9 @@ export default class SingleBarChart extends Component {
 			isNewCommentFormDisplayed: false,
 			redirectToHome: false,
 			formattedTracks: [],
-			showRemove: true
+			showRemove: true,
+			redirectToBarChart: false
+
 		};
 	}
 	componentDidMount() {
@@ -128,9 +130,33 @@ export default class SingleBarChart extends Component {
 		});
 	};
 
+	// addTrackToBarChart = () => {
+	// 	axios
+	// 		.post(`/api/barCharts/${this.props.match.params.barChartId}/tracks`, this.props.track)
+	// 		.then(res => {
+	// 			this.setState({ redirectToBarChart: true });
+	// 		})
+	// };
+
+	// deleteTrack = () => {
+	// 	axios
+	// 		.delete(
+	// 			`/api/barCharts/${this.props.barChartId}/tracks/${this.props.track._id}`
+	// 		)
+	// 		.then(res => {
+	// 			this.setState({ redirectToBarChart: true });
+	// 		}).then(() => {
+	// 			return <Redirect to={`/barcharts/${this.props.barChartId}`} />
+	// 		})
+	// }
+
 	render() {
 		if (this.state.redirectToHome) {
 			return <Redirect to='/home' />;
+		}
+
+		if (this.state.redirectToBarChart) {
+			return <Redirect to={`/barcharts/${this.props.barChartId}`} />;
 		}
 
 		return (

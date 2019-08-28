@@ -52,6 +52,9 @@ export default class Trackcard extends Component {
 			.then(res => {
 				this.setState({ redirectToBarChart: true });
 			})
+			.then(() => {
+				return <Redirect to={`/barcharts/${this.props.barChartId}`} />;
+			});
 	};
 
 	render() {
@@ -78,22 +81,20 @@ export default class Trackcard extends Component {
 							</Typography>
 						</CardContent>
 					</CardActionArea>
-					<CardActions style={styles.actions}>
-						<Button
-							size='small'
-							color='primary'
-							onClick={this.addTrackToBarChart}>
-							Add
-						</Button>
-						{this.props.showRemove ? (
+
+					{this.props.showRemove ? (
+						<CardActions style={styles.actions}>
 							<Button
 								size='small'
-								color='red'
-								onClick={this.deleteTrack}>
+								color='primary'
+								onClick={this.addTrackToBarChart}>
+								Add
+							</Button>
+							<Button size='small' color='red' onClick={this.deleteTrack}>
 								Remove
 							</Button>
-						) : null}
-					</CardActions>
+						</CardActions>
+					) : null}
 				</Card>
 			</GridListTile>
 		);
