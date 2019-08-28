@@ -25,8 +25,8 @@ export default class BarChart extends Component {
 		const styles = this.getStyles();
 		const { data } = this.props;
 		const { graphFeature } = this.props;
-
-		console.log('from barchart', data);
+		console.log('from barchart graphFeature:', graphFeature)
+		console.log('from barchart data:', data);
 
 		return (
 			<div>

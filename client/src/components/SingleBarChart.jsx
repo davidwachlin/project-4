@@ -220,7 +220,7 @@ export default class SingleBarChart extends Component {
 
 						<BarChart
 							data={this.state.tracksWithFeatures}
-							graphFeature={this.state.graphFeature}
+							graphFeature={this.state.barChart.graphFeature}
 						/>
 
 						{this.state.isNewCommentFormDisplayed ? (
