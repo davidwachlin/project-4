@@ -54,9 +54,7 @@ export default class Trackcard extends Component {
 	};
 
 	render() {
-		// if (this.state.redirectToBarChart) {
-		// 	return <Redirect to={`/barcharts/${this.props.barChartId}`} />;
-		// }
+
 		const imgUrl = this.props.imgUrl || this.props.track.album.images[1].url;
 
 		return (
@@ -69,7 +67,6 @@ export default class Trackcard extends Component {
 							image={imgUrl}
 							title='album cover'
 						/>
-						{/* <img src={imgUrl} alt='cover' /> */}
 						<CardContent style={styles.content}>
 							<Typography variant='body2' color='textSecondary' component='p'>
 								{this.props.track.name}

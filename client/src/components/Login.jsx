@@ -8,6 +8,7 @@ import Container from '@material-ui/core/Container';
 // import "./Login.css";
 import Link from '@material-ui/core/Link'
 import Button from '@material-ui/core/Button'
+import './Login.css'
 
 
 export const authEndpoint = 'https://accounts.spotify.com/authorize';
@@ -15,8 +16,8 @@ const localRedirectUri  = 'http://localhost:3000';
 const herokuRedirectUri = 'https://lit-crag-54993.herokuapp.com'
 // Replace with your app's client ID, redirect URI and desired scopes
 const clientId = 'baf17787c2f143b594964abf61d5ae74';
-// const redirectUri = localRedirectUri
-const redirectUri = herokuRedirectUri
+const redirectUri = localRedirectUri
+// const redirectUri = herokuRedirectUri
 
 //heroku redirectUri =
 const scopes = [
@@ -53,7 +54,7 @@ class Login extends Component {
 	}
 	render() {
 		return (
-			// <Container className='Login'>
+			<Container className='Login'>
 				<header className='Login-header'>
 					<div><img src={logo} className='Login-logo' alt='logo' /></div>
 					{!this.state.token && (
@@ -71,7 +72,7 @@ class Login extends Component {
 						<Redirect to='/home' />
 					)}
 				</header>
-			// </Container>
+			</Container>
 		);
 	}
 }

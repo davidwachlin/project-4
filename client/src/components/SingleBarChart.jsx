@@ -1,17 +1,19 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import BarChart from './BarChart';
 import SpotifyWebApi from 'spotify-web-api-js';
-import TrackSearch from './TrackSearch/TrackSearch';
 import { Link, Redirect } from 'react-router-dom';
+
 import Trackcard from './Trackcard';
+import BarChart from './BarChart';
+import TrackSearch from './TrackSearch/TrackSearch';
 import Tracks from './Tracks';
+import Comments from './Comments';
 
 import Container from '@material-ui/core/Container';
 import Button from '@material-ui/core/Button';
 import { Divider } from '@material-ui/core';
 import Typography from '@material-ui/core/Typography';
-import Box from '@material-ui/core/Box'
+import Box from '@material-ui/core/Box';
 import './Home.css';
 
 const spotifyApi = new SpotifyWebApi();
@@ -44,7 +46,6 @@ export default class SingleBarChart extends Component {
 		console.log('singlebarchart component did mount');
 		this.getBarChart();
 		// this.getTracks();
-		this.getCommments();
 		// this.attachTrackAudioFeatures()
 	}
 
@@ -99,13 +100,6 @@ export default class SingleBarChart extends Component {
 		console.log('from formatTracks 3 editTracks:', editTracks);
 		this.setState({ formattedTracks: editTracks });
 	};
-	getCommments = () => {
-		axios
-			.get(`/api/barCharts/${this.props.match.params.barChartId}/comments`)
-			.then(res => {
-				this.setState({ comments: res.data });
-			});
-	};
 
 	getTrackAudioFeatures = () => {
 		let trackIds = this.state.tracks.map(track => track.id);
@@ -132,50 +126,11 @@ export default class SingleBarChart extends Component {
 		});
 	};
 
-	handleToggleNewCommentForm = () => {
-		this.setState(state => {
-			return { isNewCommentFormDisplayed: !state.isNewCommentFormDisplayed };
-		});
-	};
-
-	handleInputChange = e => {
-		const newComment = { ...this.state.newComment };
-		newComment[e.target.name] = e.target.value;
-		this.setState({ newComment: newComment });
-	};
-
-	handleCommentSubmit = event => {
-		event.preventDefault();
-		axios
-			.post(
-				`/api/barCharts/${this.props.match.params.barChartId}/comments`,
-				this.state.newComment
-			)
-			.then(() => {
-				this.handleToggleNewCommentForm();
-				this.getCommments();
-			});
-	};
-
 	render() {
-		// let trackList = this.state.tracks.map(track => {
-		// 	console.log(track)
-		// 	return <Trackcard track={track} barChartId={this.props.match.params.barChartId} />
-		// })
 		if (this.state.redirectToHome) {
 			return <Redirect to='/home' />;
 		}
 
-		let commentList = this.state.comments.map(comment => (
-			<div key={comment._id}>
-				<p>{comment.comment}</p>
-				<p>By: {comment.author}</p>
-				<Link
-					to={`/barcharts/${this.props.match.params.barChartId}/comments/${comment._id}`}>
-					View/Edit
-				</Link>
-			</div>
-		));
 		return (
 			<Container>
 				<h1>{this.state.barChart.name}</h1>
@@ -201,7 +156,7 @@ export default class SingleBarChart extends Component {
 					<div>
 						<Box className='tracks-title'>
 							<Typography variant='h4' gutterBottom className='tracks-title'>
-								 Tracks for {this.state.barChart.name}
+								Tracks for {this.state.barChart.name}
 							</Typography>
 							<Divider />
 						</Box>
@@ -223,40 +178,7 @@ export default class SingleBarChart extends Component {
 							graphFeature={this.state.barChart.graphFeature}
 						/>
 
-						{this.state.isNewCommentFormDisplayed ? (
-							<form onSubmit={this.handleCommentSubmit}>
-								<label htmlFor='comment'>Comment</label>
-								<input
-									onChange={this.handleInputChange}
-									type='text'
-									id='comment'
-									name='comment'
-									value={this.state.newComment.comment}
-								/>
-
-								<label htmlFor='author'>Author</label>
-								<input
-									onChange={this.handleInputChange}
-									type='text'
-									id='author'
-									name='author'
-									value={this.state.newComment.author}
-								/>
-								<input type='submit' value='Add' />
-							</form>
-						) : (
-							<div>
-								<h5>Comments</h5>
-								{commentList}
-
-								<Button
-									variant='outlined'
-									color='primary'
-									onClick={this.handleToggleNewCommentForm}>
-									New Comment
-								</Button>
-							</div>
-						)}
+						<Comments barChartId={this.props.match.params.barChartId} />
 					</div>
 				)}
 			</Container>

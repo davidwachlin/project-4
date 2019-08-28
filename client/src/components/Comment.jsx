@@ -116,8 +116,8 @@ export default class Comment extends Component {
 			<div>
 				<p>{this.state.comment.comment}</p>
 				<p>By: {this.state.comment.author}</p>
-				<button onClick={this.handleToggleEditForm}>Edit</button>
-				<button onClick={this.handleDeleteComment}>Delete</button>
+				<Button color='primary' size='small' onClick={this.handleToggleEditForm}>Edit</Button>
+				<Button color='primary' size='small' onClick={this.handleDeleteComment}>Delete</Button>
 			</div>
 		);
 	}

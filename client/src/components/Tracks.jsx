@@ -12,12 +12,11 @@ const useStyles = makeStyles(theme => ({
 		display: 'flex',
 		flexWrap: 'wrap',
 		justifyContent: 'space-around',
-		overflow: 'hidden',
+		overflow: 'hidden'
 		// backgroundColor: theme.palette.background.paper
 	},
 	gridList: {
 		flexWrap: 'nowrap',
-		// Promote the list into his own layer on Chrome. This cost memory but helps keeping high FPS.
 		transform: 'translateZ(0)'
 	},
 	title: {
@@ -31,35 +30,22 @@ const useStyles = makeStyles(theme => ({
 export default function Tracks(props) {
 	const classes = useStyles();
 
-	// let tracksList = props.tracks.map(track => {
-	// 	console.log(track);
-	// 	console.log(track.album[0].images[1].url);
-	// 	return (
-	// 		<Trackcard
-	// 			key={track._id}
-	// 			track={track}
-	// 			barChartId={this.props.barChartId}
-	// 			imgUrl={track.album[0].images[1].url}
-	// 		/>
-	// 	);
-	// });
-	console.log('from Tracks, props:', props)
+	console.log('from Tracks, props:', props);
 	// const imgUrl = track.album[0].images[1].url || track.album.images[1].url
 
 	return (
 		<div className={classes.root}>
 			<GridList className={classes.gridList} cols={2.5}>
-		{props.tracks.map(track => {
-				
-				return <Trackcard
-					key={track._id}
-					track={track}
-					barChartId={props.barChartId}
-					imgUrl={track.album.images[1].url || track.album[0].images[1].url}
-				/>
-		})}
-			
-		
+				{props.tracks.map(track => {
+					return (
+						<Trackcard
+							key={track._id}
+							track={track}
+							barChartId={props.barChartId}
+							imgUrl={track.album.images[1].url || track.album[0].images[1].url}
+						/>
+					);
+				})}
 			</GridList>
 		</div>
 	);

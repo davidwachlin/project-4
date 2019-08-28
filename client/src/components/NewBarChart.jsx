@@ -57,15 +57,7 @@ export default class NewBarChart extends Component {
 							helperText='A name for your barchart'
 						/>
 					</Box>
-					{/* <label htmlFor='barchart-name'>Name</label>
-					<input
-						onChange={this.handleChange}
-						type='text'
-						id='barchart-name'
-						name='name'
-						value={this.state.newBarChart.name}
-						placeholder='Enter name'
-					/> */}
+
 					<Box>
 
 						<FormControl required>
@@ -95,23 +87,7 @@ export default class NewBarChart extends Component {
 							<FormHelperText>Pick an Audio Feature to graph</FormHelperText>
 						</FormControl>
 					</Box>
-					{/* <label htmlFor='barchart-graphfeature'>Graph Feature</label>
-					<select
-						value={this.state.newBarChart.graphFeature}
-						id='barchart-graphfeature'
-						name='graphFeature'
-						onChange={this.handleChange}>
-						<option value='duration_ms'>Duration</option>
-						<option value='acousticness'>Acousticness</option>
-						<option value='danceability'>Danceability</option>
-						<option value='instrumentalness'>Instrumentalness</option>
-						<option value='liveness'>Liveness</option>
-						<option value='loudness'>Loudness</option>
-						<option value='speechiness'>Speechiness</option>
-						<option value='tempo'>Tempo</option>
-						<option value='valence'>Valence</option>
-						<option value='popularity'>Popularity</option>
-					</select> */}
+
 					<Box>
 					<label htmlFor='submit-form'>
 							<Button variant='contained' component='span'>
@@ -120,7 +96,6 @@ export default class NewBarChart extends Component {
 							</Button>
 						</label>
 
-						{/* <input type='submit' /> */}
 					</Box>
 				</form>
 			</div>
