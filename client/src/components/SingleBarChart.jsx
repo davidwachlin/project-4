@@ -7,7 +7,11 @@ import { Link, Redirect } from 'react-router-dom';
 import Trackcard from './Trackcard';
 import Tracks from './Tracks';
 
+import Container from '@material-ui/core/Container';
 import Button from '@material-ui/core/Button';
+import { Divider } from '@material-ui/core';
+import Typography from '@material-ui/core/Typography';
+import Box from '@material-ui/core/Box'
 import './Home.css';
 
 const spotifyApi = new SpotifyWebApi();
@@ -37,7 +41,7 @@ export default class SingleBarChart extends Component {
 		};
 	}
 	componentDidMount() {
-		console.log('singlebarchart component did mount')
+		console.log('singlebarchart component did mount');
 		this.getBarChart();
 		// this.getTracks();
 		this.getCommments();
@@ -55,10 +59,9 @@ export default class SingleBarChart extends Component {
 			this.attachTrackAudioFeatures();
 		}
 		if (prevState.tracksWithFeatures !== this.state.tracksWithFeatures) {
-			this.formatTracks()
+			this.formatTracks();
 		}
 	}
-
 
 	getBarChart = () => {
 		axios
@@ -87,17 +90,15 @@ export default class SingleBarChart extends Component {
 	};
 
 	formatTracks = () => {
-		let editTracks = []
-		let trackCopy =  { ...this.state.tracks }
-		trackCopy.forEach(track => {
-			track.album = track.album[0]
-			editTracks.push(track)
-			console.log('from formatTracks 2', track)
-		})
-		console.log('from formatTracks 3 editTracks:', editTracks)
-		this.setState({ formattedTracks: editTracks })
-		
-	}
+		let editTracks = [];
+		this.state.tracks.forEach(track => {
+			track.album = track.album[0];
+			editTracks.push(track);
+			console.log('from formatTracks 2', track);
+		});
+		console.log('from formatTracks 3 editTracks:', editTracks);
+		this.setState({ formattedTracks: editTracks });
+	};
 	getCommments = () => {
 		axios
 			.get(`/api/barCharts/${this.props.match.params.barChartId}/comments`)
@@ -176,7 +177,7 @@ export default class SingleBarChart extends Component {
 			</div>
 		));
 		return (
-			<div>
+			<Container>
 				<h1>{this.state.barChart.name}</h1>
 				<p>{this.state.barChart.graphFeature}</p>
 				<Button
@@ -198,15 +199,17 @@ export default class SingleBarChart extends Component {
 					</div>
 				) : (
 					<div>
+						<Box className='tracks-title'>
+							<Typography variant='h4' gutterBottom className='tracks-title'>
+								 Tracks for {this.state.barChart.name}
+							</Typography>
+							<Divider />
+						</Box>
 						<div>
 							<Tracks
 								tracks={this.state.formattedTracks}
 								barChartId={this.props.match.params.barChartId}
 							/>
-							<Link
-								to={`/barcharts/${this.props.match.params.barChartId}/tracks`}>
-								Tracks
-							</Link>
 						</div>
 						<Button
 							variant='outlined'
@@ -219,8 +222,6 @@ export default class SingleBarChart extends Component {
 							data={this.state.tracksWithFeatures}
 							graphFeature={this.state.graphFeature}
 						/>
-
-						<div className='track-list'>{/* {trackList} */}</div>
 
 						{this.state.isNewCommentFormDisplayed ? (
 							<form onSubmit={this.handleCommentSubmit}>
@@ -258,7 +259,7 @@ export default class SingleBarChart extends Component {
 						)}
 					</div>
 				)}
-			</div>
+			</Container>
 		);
 	}
 }

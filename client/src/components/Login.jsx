@@ -7,6 +7,7 @@ import Container from '@material-ui/core/Container';
 //style imports
 // import "./Login.css";
 import Link from '@material-ui/core/Link'
+import Button from '@material-ui/core/Button'
 
 
 export const authEndpoint = 'https://accounts.spotify.com/authorize';
@@ -56,13 +57,15 @@ class Login extends Component {
 				<header className='Login-header'>
 					<div><img src={logo} className='Login-logo' alt='logo' /></div>
 					{!this.state.token && (
+						<Button>
 						<Link
-							className='btn btn--login Login-link'
+
 							href={`${authEndpoint}?client_id=${clientId}&redirect_uri=${redirectUri}&scope=${scopes.join(
 								'%20'
 							)}&response_type=token&show_dialog=true`}>
 							Login to Spotify
 						</Link>
+						</Button>
 					)}
 					{this.state.token && (
 						<Redirect to='/home' />

@@ -4,7 +4,14 @@ import axios from 'axios';
 import { Redirect } from 'react-router-dom';
 
 //style imports
-
+import TextField from '@material-ui/core/TextField';
+import InputLabel from '@material-ui/core/InputLabel';
+import MenuItem from '@material-ui/core/MenuItem';
+import FormHelperText from '@material-ui/core/FormHelperText';
+import FormControl from '@material-ui/core/FormControl';
+import Select from '@material-ui/core/Select';
+import Box from '@material-ui/core/Box';
+import Button from '@material-ui/core/Button'
 
 export default class NewBarChart extends Component {
 	state = {
@@ -34,7 +41,23 @@ export default class NewBarChart extends Component {
 		return (
 			<div>
 				<form onSubmit={this.handleSubmit}>
-					<label htmlFor='barchart-name'>Name</label>
+					<Box>
+						<TextField
+							onChange={this.handleChange}
+							value={this.state.newBarChart.name}
+							required
+							id='barchart-name'
+							label='Name'
+							className='textField'
+							type='text'
+							name='name'
+							autoComplete='name'
+							margin='normal'
+							variant='outlined'
+							helperText='A name for your barchart'
+						/>
+					</Box>
+					{/* <label htmlFor='barchart-name'>Name</label>
 					<input
 						onChange={this.handleChange}
 						type='text'
@@ -42,9 +65,42 @@ export default class NewBarChart extends Component {
 						name='name'
 						value={this.state.newBarChart.name}
 						placeholder='Enter name'
-					/>
-					<label htmlFor='barchart-graphfeature'>Graph Feature</label>
-					<select value={this.state.newBarChart.graphFeature} id='barchart-graphfeature' name='graphFeature' onChange={this.handleChange}>
+					/> */}
+					<Box>
+
+						<FormControl required>
+							<InputLabel htmlFor='barchart-graphfeature'>
+								Audio Feature
+							</InputLabel>
+							<Select
+								value={this.state.newBarChart.graphFeature}
+								onChange={this.handleChange}
+								name='graphFeature'
+								inputProps={{
+									id: 'barchart-graphfeature'
+								}}>
+								<MenuItem value='energy'>Energy</MenuItem>
+
+								<MenuItem value='duration_ms'>Duration</MenuItem>
+								<MenuItem value='acousticness'>Acousticness</MenuItem>
+								<MenuItem value='danceability'>Danceability</MenuItem>
+								<MenuItem value='instrumentalness'>Instrumentalness</MenuItem>
+								<MenuItem value='liveness'>Liveness</MenuItem>
+								<MenuItem value='loudness'>Loudness</MenuItem>
+								<MenuItem value='speechiness'>Speechiness</MenuItem>
+								<MenuItem value='tempo'>Tempo</MenuItem>
+								<MenuItem value='valence'>Valence</MenuItem>
+								<MenuItem value='popularity'>Popularity</MenuItem>
+							</Select>
+							<FormHelperText>Pick an Audio Feature to graph</FormHelperText>
+						</FormControl>
+					</Box>
+					{/* <label htmlFor='barchart-graphfeature'>Graph Feature</label>
+					<select
+						value={this.state.newBarChart.graphFeature}
+						id='barchart-graphfeature'
+						name='graphFeature'
+						onChange={this.handleChange}>
 						<option value='duration_ms'>Duration</option>
 						<option value='acousticness'>Acousticness</option>
 						<option value='danceability'>Danceability</option>
@@ -55,8 +111,17 @@ export default class NewBarChart extends Component {
 						<option value='tempo'>Tempo</option>
 						<option value='valence'>Valence</option>
 						<option value='popularity'>Popularity</option>
-					</select>
-					<input type='submit' />
+					</select> */}
+					<Box>
+					<label htmlFor='submit-form'>
+							<Button variant='contained' component='span'>
+								Create Library
+								<input id='submit-form' type='submit' style={{display: "none"}}/>
+							</Button>
+						</label>
+
+						{/* <input type='submit' /> */}
+					</Box>
 				</form>
 			</div>
 		);
