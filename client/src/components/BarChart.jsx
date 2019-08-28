@@ -42,8 +42,8 @@ export default class BarChart extends Component {
 						<VictoryAxis
 							tickFormat={x => {
 								return (
-								x.length > 16
-								? x.substring(0, 15) + '...'
+								x.length > 18
+								? x.substring(0, 18) + '...'
 								: `${x}`
 								)
 							}}
