@@ -61,10 +61,10 @@ export default class BarCharts extends Component {
 		});
 		return (
 			<Container>
-				<h1>All BarCharts</h1>
+				<h1>All TrackGraphs</h1>
 				<Button size='small'>
 					<Link component={RouterLink} to='/barcharts/new'>
-						New BarChart
+						New TrackGraph
 					</Link>
 				</Button>
 				<Grid container spacing={4} className='cardGrid'>

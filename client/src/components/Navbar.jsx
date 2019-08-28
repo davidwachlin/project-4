@@ -35,16 +35,20 @@ export default function ButtonAppBar() {
 							<Link
 								to={'/home'}
 								style={{ color: 'white', textDecoration: 'none' }}>
-								Spotiviz
+								SpotiViz
 							</Link>
 						</Typography>
 					</Button>
-					<Button>
+					<Button color='primary'>
 						<Typography className={classes.title} variant='h6' noWrap>
 							<Link
 								to={'/barcharts'}
-								style={{ color: 'white', textDecoration: 'none' }}>
-								Track Charts
+								style={{
+									color: 'white',
+									textDecoration: 'none',
+									// textDecorationColor: 'green'
+								}}>
+								TrackGraphs
 							</Link>
 						</Typography>
 					</Button>
