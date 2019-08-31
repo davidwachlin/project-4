@@ -55,12 +55,12 @@ export default class BarChart extends Component {
 						/>
 						<VictoryAxis
 							dependentAxis
-							label={`${graphFeature}`}
+							label={`Audio Feature: ${graphFeature}`}
 							style={{
 								axis: { stroke: 'white' },
 								ticks: { stroke: 'white' },
 								tickLabels: { fontSize: 11, fill: 'white' },
-								axisLabel: { fill: 'white' }
+								axisLabel: { fill: 'white', textAlign: 'left' }
 							}}
 						/>
 						<VictoryBar
