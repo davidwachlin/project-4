@@ -94,11 +94,13 @@ export default class SingleBarChart extends Component {
 	};
 
 	formatTracks = () => {
-		let editTracks = [];
-		this.state.tracks.forEach(track => {
-			track.album = track.album[0];
-			editTracks.push(track);
-			console.log('from formatTracks 2', track);
+		const editTracks = this.state.tracks.map(track => {
+			return {
+				...track,
+				...{ album: track.album[0] }
+			}
+			// track.album = track.album[0];
+			// console.log('from formatTracks 2', track);
 		});
 		console.log('from formatTracks 3 editTracks:', editTracks);
 		this.setState({ formattedTracks: editTracks });
