@@ -131,6 +131,13 @@ export default class SingleBarChart extends Component {
 		});
 	};
 
+	handleDoneAdding = () => {
+		this.setState(state => {
+			return { showSearchBar: !state.showSearchBar, redirectToBarChart: !state.redirectToBarChart };
+		});
+	};
+	
+
 	// addTrackToBarChart = () => {
 	// 	axios
 	// 		.post(`/api/barCharts/${this.props.match.params.barChartId}/tracks`, this.props.track)
@@ -167,7 +174,7 @@ export default class SingleBarChart extends Component {
 						<Button
 							variant='outlined'
 							color='primary'
-							onClick={this.handleShowSearchBar}>
+							onClick={this.handleDoneAdding}>
 							Done
 						</Button>
 						<TrackSearch
