@@ -164,7 +164,7 @@ export default class SingleBarChart extends Component {
 		}
 
 		if (this.state.redirectToBarChart) {
-			return <Redirect to={`/barcharts/${this.props.barChartId}`} />;
+			return <Redirect to={`/barcharts/${this.props.match.params.barChartId}`} />;
 		}
 
 		return (
