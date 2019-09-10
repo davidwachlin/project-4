@@ -49,6 +49,7 @@ export default class TrackSearch extends Component {
 							track={track}
 							barChartId={this.props.barChartId}
 							showRemove={this.props.showRemove}
+
 						/>
 					);
 			  });

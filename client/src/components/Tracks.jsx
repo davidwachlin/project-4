@@ -4,8 +4,7 @@ import Trackcard from './Trackcard';
 //style imports
 import { makeStyles } from '@material-ui/core/styles';
 import GridList from '@material-ui/core/GridList';
-import GridListTile from '@material-ui/core/GridListTile';
-import GridListTileBar from '@material-ui/core/GridListTileBar';
+
 
 const useStyles = makeStyles(theme => ({
 	root: {
@@ -30,19 +29,21 @@ const useStyles = makeStyles(theme => ({
 export default function Tracks(props) {
 	const classes = useStyles();
 
-	console.log('from Tracks, props:', props);
+	console.log('from Tracks, props:', props.tracks);
 	// const imgUrl = track.album[0].images[1].url || track.album.images[1].url
 
 	return (
 		<div className={classes.root}>
 			<GridList className={classes.gridList} cols={2.5}>
 				{props.tracks.map(track => {
+					console.log(`tracks.jsx map function ${track}`)
 					return (
 						<Trackcard
 							key={track._id}
 							track={track}
 							barChartId={props.barChartId}
-							imgUrl={track.album.images[1].url || track.album[0].images[1].url}
+							// imgUrl={track.album.images[1].url}
+							// imgUrl={track.album.images[1].url || track.album[0].images[1].url}
 							showRemove={props.showRemove}
 						/>
 					);

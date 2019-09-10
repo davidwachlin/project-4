@@ -94,7 +94,7 @@ export default class SingleBarChart extends Component {
 	};
 
 	formatTracks = () => {
-		const editTracks = this.state.tracks.map(track => {
+		const editTracks = this.state.tracksWithFeatures.map(track => {
 			return {
 				...track,
 				...{ album: track.album[0] }
@@ -130,19 +130,13 @@ export default class SingleBarChart extends Component {
 			return { showSearchBar: !state.showSearchBar };
 		});
 	};
-
-	handleDoneAdding = () => {
-		this.setState(state => {
-			return { showSearchBar: !state.showSearchBar, redirectToBarChart: !state.redirectToBarChart };
-		});
-	};
 	
 
 	// addTrackToBarChart = () => {
 	// 	axios
 	// 		.post(`/api/barCharts/${this.props.match.params.barChartId}/tracks`, this.props.track)
-	// 		.then(res => {
-	// 			this.setState({ redirectToBarChart: true });
+	// 		.then(() => {
+	// 			console.log('track added')
 	// 		})
 	// };
 
@@ -164,7 +158,7 @@ export default class SingleBarChart extends Component {
 		}
 
 		if (this.state.redirectToBarChart) {
-			return <Redirect to={`/barcharts/${this.props.match.params.barChartId}`} />;
+			return <Redirect to={`/barcharts/${this.props.barChartId}`} />;
 		}
 
 		return (
@@ -174,7 +168,7 @@ export default class SingleBarChart extends Component {
 						<Button
 							variant='outlined'
 							color='primary'
-							onClick={this.handleDoneAdding}>
+							onClick={this.handleShowSearchBar}>
 							Done
 						</Button>
 						<TrackSearch

@@ -31,7 +31,7 @@ export default class BarChart extends Component {
 		return (
 			<Box width='100%'>
 					<VictoryChart
-						padding={{ left: 100, top: 10, right: 5, bottom: 50 }}
+						padding={{ left: 110, top: 10, right: 5, bottom: 50 }}
 						domainPadding={20}
 						animate={{
 							onEnter: { duration: 1000 }

@@ -62,7 +62,7 @@ export default class Comments extends Component {
 					{comment.comment}
 				</Typography>
 				<Typography variant='subtitle2' component='p'>
-					<p>By: {comment.author}</p>
+					By: {comment.author}
 				</Typography>
 
 				<Link
